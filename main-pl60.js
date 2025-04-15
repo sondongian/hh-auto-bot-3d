@@ -1,5 +1,6 @@
+(async () => {
 // Phúc Lợi
-(function () {
+(function runPhucLoi () {
   const ACTIVITY_NAME = "🎁 Hoạt động: Phúc Lợi";
   let countdown = 3;
 
@@ -199,7 +200,7 @@
 })();
 
 // Thí Luyện Tông Môn
-(function () {
+(function runTLTM () {
   const ACTIVITY_NAME = "🧪 Hoạt động: Thí Luyện Tông Môn";
   let countdown = 2;
 
@@ -569,4 +570,10 @@
       attackBoss();
       var autoAttackInterval = setInterval(attackBoss, 30 * 60 * 1000);
     }
+  
+(async () => {
+  await runPhucLoi ();
+  await runTLTM ();
+  await attackBoss();
   })();
+})();
