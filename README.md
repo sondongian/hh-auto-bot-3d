@@ -1,0 +1,1 @@
+# hh3d-auto-bot
