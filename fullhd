@@ -3,6 +3,74 @@ const ACTION_URL = DOMAIN + '/wp-json/hh3d/v1/action';
 const HH3D_AJAX_URL = DOMAIN + '/wp-content/themes/halimmovies-child/hh3d-ajax.php'
 const ADMIN_AJAX_URL = DOMAIN + '/wp-admin/admin-ajax.php'
 
+function showNotificationUI(message, type = "success", duration = 4000) {
+    const containerClass = 'hh3d-notification-container';
+    let container = document.querySelector(`.${containerClass}`);
+    if (!container) {
+        container = document.createElement("div");
+        container.className = containerClass;
+        Object.assign(container.style, {
+            position: 'fixed',
+            top: '10px',
+            right: '10px',
+            zIndex: 9999,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            fontFamily: 'Poppins, sans-serif',
+        });
+        document.body.appendChild(container);
+    }
+
+    const box = document.createElement("div");
+    box.innerHTML = message; // Hỗ trợ emoji và HTML
+    box.className = 'hh3d-notification';
+    box.style.opacity = '0';
+    container.appendChild(box);
+
+    // Trigger animation
+    requestAnimationFrame(() => {
+        box.style.opacity = '1';
+        box.style.transform = 'translateY(0)';
+    });
+
+    setTimeout(() => {
+        box.style.opacity = '0';
+        box.style.transform = 'translateY(-20px)';
+        setTimeout(() => box.remove(), 500);
+    }, duration);
+}
+
+const styleId = 'hh3d-notification-style';
+if (!document.getElementById(styleId)) {
+    const style = document.createElement('style');
+    style.id = styleId;
+    style.textContent = `
+.hh3d-notification {
+  padding: 12px 18px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  background: linear-gradient(135deg, #1abc9c, #16a085);
+  transition: all 0.4s ease;
+  transform: translateY(-20px);
+  white-space: pre-wrap;
+  max-width: 300px;
+}
+.hh3d-notification-container .hh3d-notification.error {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+.hh3d-notification-container .hh3d-notification.info {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+}
+.hh3d-notification-container .hh3d-notification.success {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+`;
+    document.head.appendChild(style);
+}
+
 const quizBank = {
     "Ai là huynh đệ và cũng là người thầy mà Vương Lâm trong Tiên Nghịch kính trọng nhất ?": "Tư Đồ Nam",
     "Ai là mẹ của Đường Tam?": "A Ngân",
@@ -543,6 +611,7 @@ async function saveQuizResult(question_id, answer, index) {
             ? `✅ [Vấn Đáp] - Câu ${index + 1}`
             : `❌ [Vấn Đáp] - Câu ${index + 1}`;
         console.log(message);
+        showNotificationUI(message, "success");
     } else {
         console.log('<Logger>', `🔴 [Vấn Đáp] - Chưa trả lời câu ${index + 1}`);
     }
@@ -581,6 +650,7 @@ async function claimDailyActivityReward() {
             ? `✅ [Hoạt Động Hằng Ngày] - Nhận thành công - ${stage}`
             : `❌ [Hoạt Động Hằng Ngày] - Nhận thất bại - ${result.data?.message}`
         console.log(message);
+        showNotificationUI(message, "success");
         return !!result.success;
     };
 
@@ -630,6 +700,7 @@ async function handleFollow({ ids, clean = false }) {
             ? `✅ [Luận Võ] - Theo dõi thành công ID: ${id}`
             : `❌ [Luận Võ] - Theo dõi thất bại ID: ${id}`;
         console.log(message);
+        showNotificationUI(message, "success");
         await new Promise(resolve => setTimeout(resolve, 250));
     }
     console.log('<Logger>', `🟢 [Luận Võ] - Hoàn thành xử lý theo dõi.`);
@@ -659,6 +730,7 @@ async function handleUnfollow(users) {
             ? `✅ [Luận Võ] - Hủy theo dõi thành công ID: ${id}`
             : `❌ [Luận Võ] - Hủy theo dõi thất bại ID: ${id}`;
         console.log(message);
+        showNotificationUI(message, "success");
         await new Promise(resolve => setTimeout(resolve, 250));
     }
     console.log('<Logger>', `🟢 [Luận Võ] - Hoàn thành xử lý hủy theo dõi.`);
@@ -714,6 +786,7 @@ async function joinBattle() {
         ? `✅ [Luận Võ] - Tham gia thành công.`
         : `❌ [Luận Võ] - Tham gia thất bại.`
     console.log(message);
+    showNotificationUI(message, "success");
     return !!result.success;
 }
 
@@ -733,6 +806,7 @@ async function toggleAutoAccept(isOn) {
         ? `✅ [Luận Võ] - ${isOn ? 'Bật' : 'Tắt'} tự động khiêu chiến thành công.`
         : `❌ [Luận Võ] - ${isOn ? 'Bật' : 'Tắt'} tự động khiêu chiến thất bại.`;
     console.log(message);
+    showNotificationUI(message, "success");
 }
 
 async function receiveReward(nonce) {
@@ -750,6 +824,7 @@ async function receiveReward(nonce) {
         ? `✅ [Luận Võ] - Nhận thưởng thành công - ${result.data?.message}`
         : `❌ [Luận Võ] - Nhận thưởng thất bại - ${result.data?.message}`;
     console.log(message);
+    showNotificationUI(message, "success");
 }
 
 async function getReceivedChallenges() {
@@ -798,6 +873,7 @@ async function handleRejectReceivedChallenge(challenge, nonce) {
         ? `✅ [Luận Võ] - Từ chối thành công yêu cầu của ${challenge.name} (${challenge.target_user_id})`
         : `❌ [Luận Võ] -Từ chối thất bại yêu cầu của ${challenge.name} (${challenge.target_user_id})`;
     console.log(message);
+    showNotificationUI(message, "success");
 }
 
 async function sendChallenge(user, nonce) {
@@ -986,6 +1062,7 @@ async function receiveLiXi(roomId) {
         ? `✅ [Tiên Duyên] - Mở Lì Xì thành công phòng ${roomId} - Nhận ${result.data?.amount} ${result.data?.name}`
         : `❌ [Tiên Duyên] - Mở Lì Xì thất bại - ${result.data?.message}`;
     console.log(message);
+    showNotificationUI(message, "success");
 }
 
 async function receiveAllLiXi() {
@@ -1025,6 +1102,7 @@ async function redeemCode(code) {
     });
     const message = result.success = `${result.success ? '✅' : '⚠️'} [Linh Thạch] - ${code} - ${result.data?.message}`;
     console.log(message);
+    showNotificationUI(message, "success");
 }
 
 async function redeemCodes(codes) {
