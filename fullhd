@@ -3,74 +3,6 @@ const ACTION_URL = DOMAIN + '/wp-json/hh3d/v1/action';
 const HH3D_AJAX_URL = DOMAIN + '/wp-content/themes/halimmovies-child/hh3d-ajax.php'
 const ADMIN_AJAX_URL = DOMAIN + '/wp-admin/admin-ajax.php'
 
-function showNotificationUI(message, type = "success", duration = 1000) {
-    const containerClass = 'hh3d-notification-container';
-    let container = document.querySelector(`.${containerClass}`);
-    if (!container) {
-        container = document.createElement("div");
-        container.className = containerClass;
-        Object.assign(container.style, {
-            position: 'fixed',
-            top: '10px',
-            right: '10px',
-            zIndex: 9999,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px',
-            fontFamily: 'Poppins, sans-serif',
-        });
-        document.body.appendChild(container);
-    }
-
-    const box = document.createElement("div");
-    box.innerHTML = message; // Hỗ trợ emoji và HTML
-    box.className = 'hh3d-notification';
-    box.style.opacity = '0';
-    container.appendChild(box);
-
-    // Trigger animation
-    requestAnimationFrame(() => {
-        box.style.opacity = '1';
-        box.style.transform = 'translateY(0)';
-    });
-
-    setTimeout(() => {
-        box.style.opacity = '0';
-        box.style.transform = 'translateY(-20px)';
-        setTimeout(() => box.remove(), 500);
-    }, duration);
-}
-
-const styleId = 'hh3d-notification-style';
-if (!document.getElementById(styleId)) {
-    const style = document.createElement('style');
-    style.id = styleId;
-    style.textContent = `
-.hh3d-notification {
-  padding: 12px 18px;
-  border-radius: 12px;
-  color: #fff;
-  font-weight: bold;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  background: linear-gradient(135deg, #1abc9c, #16a085);
-  transition: all 0.4s ease;
-  transform: translateY(-20px);
-  white-space: pre-wrap;
-  max-width: 300px;
-}
-.hh3d-notification-container .hh3d-notification.error {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
-}
-.hh3d-notification-container .hh3d-notification.info {
-  background: linear-gradient(135deg, #3498db, #2980b9);
-}
-.hh3d-notification-container .hh3d-notification.success {
-  background: linear-gradient(135deg, #2ecc71, #27ae60);
-}
-`;
-    document.head.appendChild(style);
-}
-
 const quizBank = {
     "Ai là huynh đệ và cũng là người thầy mà Vương Lâm trong Tiên Nghịch kính trọng nhất ?": "Tư Đồ Nam",
     "Ai là mẹ của Đường Tam?": "A Ngân",
@@ -227,13 +159,45 @@ const quizBank = {
 
 const latinMap = {
     // Vietnamese
-    'đ': 'd', 'Đ': 'D',
+    'À': 'A', 'Á': 'A', 'Ả': 'A', 'Ã': 'A', 'Ạ': 'A',
+    'Ă': 'A', 'Ằ': 'A', 'Ắ': 'A', 'Ẳ': 'A', 'Ẵ': 'A', 'Ặ': 'A',
+    'Â': 'A', 'Ầ': 'A', 'Ấ': 'A', 'Ẩ': 'A', 'Ẫ': 'A', 'Ậ': 'A',
+    'Đ': 'D',
+    'È': 'E', 'É': 'E', 'Ẻ': 'E', 'Ẽ': 'E', 'Ẹ': 'E',
+    'Ê': 'E', 'Ề': 'E', 'Ế': 'E', 'Ể': 'E', 'Ễ': 'E', 'Ệ': 'E',
+    'Ì': 'I', 'Í': 'I', 'Ỉ': 'I', 'Ĩ': 'I', 'Ị': 'I',
+    'Ò': 'O', 'Ó': 'O', 'Ỏ': 'O', 'Õ': 'O', 'Ọ': 'O',
+    'Ô': 'O', 'Ồ': 'O', 'Ố': 'O', 'Ổ': 'O', 'Ỗ': 'O', 'Ộ': 'O',
+    'Ơ': 'O', 'Ờ': 'O', 'Ớ': 'O', 'Ở': 'O', 'Ỡ': 'O', 'Ợ': 'O',
+    'Ù': 'U', 'Ú': 'U', 'Ủ': 'U', 'Ũ': 'U', 'Ụ': 'U',
+    'Ư': 'U', 'Ừ': 'U', 'Ứ': 'U', 'Ử': 'U', 'Ữ': 'U', 'Ự': 'U',
+    'Ỳ': 'Y', 'Ý': 'Y', 'Ỷ': 'Y', 'Ỹ': 'Y', 'Ỵ': 'Y',
+    'à': 'a', 'á': 'a', 'ả': 'a', 'ã': 'a', 'ạ': 'a',
+    'ă': 'a', 'ằ': 'a', 'ắ': 'a', 'ẳ': 'a', 'ẵ': 'a', 'ặ': 'a',
+    'â': 'a', 'ầ': 'a', 'ấ': 'a', 'ẩ': 'a', 'ẫ': 'a', 'ậ': 'a',
+    'đ': 'd',
+    'è': 'e', 'é': 'e', 'ẻ': 'e', 'ẽ': 'e', 'ẹ': 'e',
+    'ê': 'e', 'ề': 'e', 'ế': 'e', 'ể': 'e', 'ễ': 'e', 'ệ': 'e',
+    'ì': 'i', 'í': 'i', 'ỉ': 'i', 'ĩ': 'i', 'ị': 'i',
+    'ò': 'o', 'ó': 'o', 'ỏ': 'o', 'õ': 'o', 'ọ': 'o',
+    'ô': 'o', 'ồ': 'o', 'ố': 'o', 'ổ': 'o', 'ỗ': 'o', 'ộ': 'o',
+    'ơ': 'o', 'ờ': 'o', 'ớ': 'o', 'ở': 'o', 'ỡ': 'o', 'ợ': 'o',
+    'ù': 'u', 'ú': 'u', 'ủ': 'u', 'ũ': 'u', 'ụ': 'u',
+    'ư': 'u', 'ừ': 'u', 'ứ': 'u', 'ử': 'u', 'ữ': 'u', 'ự': 'u',
+    'ỳ': 'y', 'ý': 'y', 'ỷ': 'y', 'ỹ': 'y', 'ỵ': 'y',
 
     // Cyrillic
     'А': 'A', 'В': 'B', 'С': 'C', 'Е': 'E', 'Н': 'H', 'К': 'K',
-    'М': 'M', 'О': 'O', 'Р': 'P', 'Т': 'T', 'Х': 'X',
-    'а': 'a', 'е': 'e', 'о': 'o', 'р': 'p', 'с': 'c',
-    'х': 'x', 'н': 'n', 'і': 'i', 'ѕ': 's', 'ԁ': 'd', 'ј': 'j',
+    'М': 'M', 'О': 'O', 'Р': 'P', 'Т': 'T', 'Х': 'X', 'І': 'I',
+    'а': 'a', 'е': 'e', 'о': 'o', 'р': 'p', 'с': 'c', 'х': 'x',
+    'н': 'n', 'і': 'i', 'ѕ': 's', 'ԁ': 'd', 'ј': 'j', 'ԛ': 'q',
+    'һ': 'h', 'ӏ': 'l', 'ԝ': 'w', 'ԍ': 'g', 'ԃ': 'd', 'Ԍ': 'G',
+    'ґ': 'g', 'Ґ': 'G', 'Ё': 'E', 'ё': 'e', 'Ѐ': 'E', 'ѐ': 'e',
+    'Й': 'I', 'й': 'i', 'Љ': 'L', 'љ': 'l', 'Њ': 'N', 'њ': 'n',
+    'Ћ': 'C', 'ћ': 'c', 'Ѓ': 'G', 'ѓ': 'g', 'Ў': 'U', 'ў': 'u',
+    'Џ': 'D', 'џ': 'd', 'Ӝ': 'Z', 'ӝ': 'z', 'Ӟ': 'Z', 'ӟ': 'z',
+    'Ү': 'Y', 'ү': 'y', 'Ұ': 'U', 'ұ': 'u', 'Қ': 'K', 'қ': 'k',
+    'Ң': 'N', 'ң': 'n', 'Ө': 'O', 'ө': 'o', 'Ә': 'A', 'ә': 'a',
 
     // Greek
     'Α': 'A', 'Β': 'B', 'Ε': 'E', 'Ζ': 'Z', 'Η': 'H', 'Ι': 'I',
@@ -260,6 +224,15 @@ const latinMap = {
     'ɪ': 'i', 'ᴊ': 'j', 'ᴋ': 'k', 'ʟ': 'l', 'ᴍ': 'm', 'ɴ': 'n',
     'ᴏ': 'o', 'ᴘ': 'p', 'ǫ': 'q', 'ʀ': 'r', 's': 's', 'ᴛ': 't',
     'ᴜ': 'u', 'ᴠ': 'v', 'ᴡ': 'w', 'x': 'x', 'ʏ': 'y', 'ᴢ': 'z',
+
+    // Diacritical Latin
+    'ł': 'l', 'Ł': 'L', 'ß': 'ss', 'Þ': 'Th', 'þ': 'th',
+    'Œ': 'OE', 'œ': 'oe', 'Æ': 'AE', 'æ': 'ae',
+    'ñ': 'n', 'Ñ': 'N', 'ç': 'c', 'Ç': 'C', 'ø': 'o', 'Ø': 'O',
+    'å': 'a', 'Å': 'A', 'ð': 'd', 'Ð': 'D', 'ŋ': 'n', 'Ŋ': 'N',
+    'š': 's', 'Š': 'S', 'ž': 'z', 'Ž': 'Z', 'č': 'c', 'Č': 'C',
+    'ď': 'd', 'Ď': 'D', 'ť': 't', 'Ť': 'T', 'ů': 'u', 'Ů': 'U',
+    'ą': 'a', 'Ą': 'A', 'ę': 'e', 'Ę': 'E',
 };
 
 const normalize = (value) => {
@@ -305,14 +278,19 @@ const bestMatch = (options, target) => {
     let bestIndex = -1;
     let bestScore = -1;
     for (let index = 0; index < options.length; index++) {
-        const normalizedOption = normalize(options[index]);
+        const option = options[index];
+        const normalizedOption = normalize(option);
+        if (normalizedOption === normalizedTarget) {
+            console.log(`🔍 [Vấn Đáp] Khớp tuyệt đối: "${target}" = "${option}"`);
+            return index;
+        }
         const score = parseFloat(similarityPercent(normalizedOption, normalizedTarget));
         if (score > bestScore) {
             bestIndex = index;
             bestScore = score;
         }
     }
-    console.log('<Logger>', `🔐 target: ${target} - result: ${options[bestIndex]} (${bestScore})`);
+    console.log(`🔍 [Vấn Đáp] So sánh: "${target}" ≈ "${options[bestIndex]}" ➜ giống nhau ${bestScore}%`);
     return bestIndex;
 }
 
@@ -519,7 +497,8 @@ async function openChestPL() {
 // Thí Luyện Tông Môn
 async function getRemainingTimeTLTM(security) {
     if (!security) {
-        return console.log('<Logger>', `🔴 [Thí Luyện Tông Môn] - Không tìm thấy security get_remaining_time_tltm`);
+        console.log('<Logger>', `🔴 [Thí Luyện Tông Môn] - Không tìm thấy security get_remaining_time_tltm`);
+        return null;
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -565,7 +544,7 @@ async function openChestTLTM() {
 // Vấn Đáp
 async function runQuiz() {
     const bank = Object.fromEntries(
-        Object.entries(quizBank).map(([key, value]) => [normalize(key), normalize(value)])
+        Object.entries(quizBank).map(([key, value]) => [normalize(key), value])
     );
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -611,7 +590,6 @@ async function saveQuizResult(question_id, answer, index) {
             ? `✅ [Vấn Đáp] - Câu ${index + 1}`
             : `❌ [Vấn Đáp] - Câu ${index + 1}`;
         console.log(message);
-        showNotificationUI(message, "success");
     } else {
         console.log('<Logger>', `🔴 [Vấn Đáp] - Chưa trả lời câu ${index + 1}`);
     }
@@ -650,7 +628,6 @@ async function claimDailyActivityReward() {
             ? `✅ [Hoạt Động Hằng Ngày] - Nhận thành công - ${stage}`
             : `❌ [Hoạt Động Hằng Ngày] - Nhận thất bại - ${result.data?.message}`
         console.log(message);
-        showNotificationUI(message, "success");
         return !!result.success;
     };
 
@@ -700,7 +677,6 @@ async function handleFollow({ ids, clean = false }) {
             ? `✅ [Luận Võ] - Theo dõi thành công ID: ${id}`
             : `❌ [Luận Võ] - Theo dõi thất bại ID: ${id}`;
         console.log(message);
-        showNotificationUI(message, "success");
         await new Promise(resolve => setTimeout(resolve, 250));
     }
     console.log('<Logger>', `🟢 [Luận Võ] - Hoàn thành xử lý theo dõi.`);
@@ -730,7 +706,6 @@ async function handleUnfollow(users) {
             ? `✅ [Luận Võ] - Hủy theo dõi thành công ID: ${id}`
             : `❌ [Luận Võ] - Hủy theo dõi thất bại ID: ${id}`;
         console.log(message);
-        showNotificationUI(message, "success");
         await new Promise(resolve => setTimeout(resolve, 250));
     }
     console.log('<Logger>', `🟢 [Luận Võ] - Hoàn thành xử lý hủy theo dõi.`);
@@ -786,7 +761,6 @@ async function joinBattle() {
         ? `✅ [Luận Võ] - Tham gia thành công.`
         : `❌ [Luận Võ] - Tham gia thất bại.`
     console.log(message);
-    showNotificationUI(message, "success");
     return !!result.success;
 }
 
@@ -806,7 +780,6 @@ async function toggleAutoAccept(isOn) {
         ? `✅ [Luận Võ] - ${isOn ? 'Bật' : 'Tắt'} tự động khiêu chiến thành công.`
         : `❌ [Luận Võ] - ${isOn ? 'Bật' : 'Tắt'} tự động khiêu chiến thất bại.`;
     console.log(message);
-    showNotificationUI(message, "success");
 }
 
 async function receiveReward(nonce) {
@@ -824,7 +797,6 @@ async function receiveReward(nonce) {
         ? `✅ [Luận Võ] - Nhận thưởng thành công - ${result.data?.message}`
         : `❌ [Luận Võ] - Nhận thưởng thất bại - ${result.data?.message}`;
     console.log(message);
-    showNotificationUI(message, "success");
 }
 
 async function getReceivedChallenges() {
@@ -873,7 +845,6 @@ async function handleRejectReceivedChallenge(challenge, nonce) {
         ? `✅ [Luận Võ] - Từ chối thành công yêu cầu của ${challenge.name} (${challenge.target_user_id})`
         : `❌ [Luận Võ] -Từ chối thất bại yêu cầu của ${challenge.name} (${challenge.target_user_id})`;
     console.log(message);
-    showNotificationUI(message, "success");
 }
 
 async function sendChallenge(user, nonce) {
@@ -1062,7 +1033,6 @@ async function receiveLiXi(roomId) {
         ? `✅ [Tiên Duyên] - Mở Lì Xì thành công phòng ${roomId} - Nhận ${result.data?.amount} ${result.data?.name}`
         : `❌ [Tiên Duyên] - Mở Lì Xì thất bại - ${result.data?.message}`;
     console.log(message);
-    showNotificationUI(message, "success");
 }
 
 async function receiveAllLiXi() {
@@ -1102,7 +1072,6 @@ async function redeemCode(code) {
     });
     const message = result.success = `${result.success ? '✅' : '⚠️'} [Linh Thạch] - ${code} - ${result.data?.message}`;
     console.log(message);
-    showNotificationUI(message, "success");
 }
 
 async function redeemCodes(codes) {
@@ -1169,7 +1138,7 @@ async function loadDoThachData(requestData) {
         return [];
     };
     if (!is_reward_time) return stones;
-    const rewardStone = stones.find(stone => stone.id == winning_stone_id && stone.bet_placed === true);
+    const rewardStone = stones.find(stone => stone.stone_id == winning_stone_id && stone.bet_placed === true);
     if (!rewardStone) {
         console.log('<Logger>', `🟡 [Đổ Thạch] - Không có thưởng!`);
         return [];
@@ -1250,11 +1219,11 @@ const bets = [1, 2];
 // ➤ false = Tắt tự động nhận khiêu chiến.
 const battleAutoOn = true;
 
-// Tùy chọn gửi khiêu chiến trong Luận Võ - online (true hoặc false) - retry (số).
+// Tùy chọn gửi khiêu chiến trong Luận Võ - `online` (true hoặc false) - `retry` (số).
 // ➤ online: false = Không tự động tìm đánh người Online khi lượt gửi người Theo dõi chưa đạt tối đa.
 // ➤ online: true = Tự động tìm đánh người Online khi lượt gửi người Theo dõi chưa đạt tối đa.
 // ➤ retry: 3 = Số lần tải lại danh sách người Online.
-const battleOptions = { online: true, retry: 3 };
+const battleOptions = { online: false, retry: 3 };
 
 // Danh sách code cần nhập trong Linh Thạch (text).
 // ➤ Ví dụ: ["HH3D", "LINHTHACH"] hoặc  ['HH3D', 'LINHTHACH']
