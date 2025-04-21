@@ -157,142 +157,13 @@ const quizBank = {
     "Tần Nam là nhân vật chính trong bộ hoạt hình trung quốc nào sau đây ?": "Tuyệt Thế Chiến Hồn",
 };
 
-const latinMap = {
-    // Vietnamese
-    'À': 'A', 'Á': 'A', 'Ả': 'A', 'Ã': 'A', 'Ạ': 'A',
-    'Ă': 'A', 'Ằ': 'A', 'Ắ': 'A', 'Ẳ': 'A', 'Ẵ': 'A', 'Ặ': 'A',
-    'Â': 'A', 'Ầ': 'A', 'Ấ': 'A', 'Ẩ': 'A', 'Ẫ': 'A', 'Ậ': 'A',
-    'Đ': 'D',
-    'È': 'E', 'É': 'E', 'Ẻ': 'E', 'Ẽ': 'E', 'Ẹ': 'E',
-    'Ê': 'E', 'Ề': 'E', 'Ế': 'E', 'Ể': 'E', 'Ễ': 'E', 'Ệ': 'E',
-    'Ì': 'I', 'Í': 'I', 'Ỉ': 'I', 'Ĩ': 'I', 'Ị': 'I',
-    'Ò': 'O', 'Ó': 'O', 'Ỏ': 'O', 'Õ': 'O', 'Ọ': 'O',
-    'Ô': 'O', 'Ồ': 'O', 'Ố': 'O', 'Ổ': 'O', 'Ỗ': 'O', 'Ộ': 'O',
-    'Ơ': 'O', 'Ờ': 'O', 'Ớ': 'O', 'Ở': 'O', 'Ỡ': 'O', 'Ợ': 'O',
-    'Ù': 'U', 'Ú': 'U', 'Ủ': 'U', 'Ũ': 'U', 'Ụ': 'U',
-    'Ư': 'U', 'Ừ': 'U', 'Ứ': 'U', 'Ử': 'U', 'Ữ': 'U', 'Ự': 'U',
-    'Ỳ': 'Y', 'Ý': 'Y', 'Ỷ': 'Y', 'Ỹ': 'Y', 'Ỵ': 'Y',
-    'à': 'a', 'á': 'a', 'ả': 'a', 'ã': 'a', 'ạ': 'a',
-    'ă': 'a', 'ằ': 'a', 'ắ': 'a', 'ẳ': 'a', 'ẵ': 'a', 'ặ': 'a',
-    'â': 'a', 'ầ': 'a', 'ấ': 'a', 'ẩ': 'a', 'ẫ': 'a', 'ậ': 'a',
-    'đ': 'd',
-    'è': 'e', 'é': 'e', 'ẻ': 'e', 'ẽ': 'e', 'ẹ': 'e',
-    'ê': 'e', 'ề': 'e', 'ế': 'e', 'ể': 'e', 'ễ': 'e', 'ệ': 'e',
-    'ì': 'i', 'í': 'i', 'ỉ': 'i', 'ĩ': 'i', 'ị': 'i',
-    'ò': 'o', 'ó': 'o', 'ỏ': 'o', 'õ': 'o', 'ọ': 'o',
-    'ô': 'o', 'ồ': 'o', 'ố': 'o', 'ổ': 'o', 'ỗ': 'o', 'ộ': 'o',
-    'ơ': 'o', 'ờ': 'o', 'ớ': 'o', 'ở': 'o', 'ỡ': 'o', 'ợ': 'o',
-    'ù': 'u', 'ú': 'u', 'ủ': 'u', 'ũ': 'u', 'ụ': 'u',
-    'ư': 'u', 'ừ': 'u', 'ứ': 'u', 'ử': 'u', 'ữ': 'u', 'ự': 'u',
-    'ỳ': 'y', 'ý': 'y', 'ỷ': 'y', 'ỹ': 'y', 'ỵ': 'y',
-
-    // Cyrillic
-    'А': 'A', 'В': 'B', 'С': 'C', 'Е': 'E', 'Н': 'H', 'К': 'K',
-    'М': 'M', 'О': 'O', 'Р': 'P', 'Т': 'T', 'Х': 'X', 'І': 'I',
-    'а': 'a', 'е': 'e', 'о': 'o', 'р': 'p', 'с': 'c', 'х': 'x',
-    'н': 'n', 'і': 'i', 'ѕ': 's', 'ԁ': 'd', 'ј': 'j', 'ԛ': 'q',
-    'һ': 'h', 'ӏ': 'l', 'ԝ': 'w', 'ԍ': 'g', 'ԃ': 'd', 'Ԍ': 'G',
-    'ґ': 'g', 'Ґ': 'G', 'Ё': 'E', 'ё': 'e', 'Ѐ': 'E', 'ѐ': 'e',
-    'Й': 'I', 'й': 'i', 'Љ': 'L', 'љ': 'l', 'Њ': 'N', 'њ': 'n',
-    'Ћ': 'C', 'ћ': 'c', 'Ѓ': 'G', 'ѓ': 'g', 'Ў': 'U', 'ў': 'u',
-    'Џ': 'D', 'џ': 'd', 'Ӝ': 'Z', 'ӝ': 'z', 'Ӟ': 'Z', 'ӟ': 'z',
-    'Ү': 'Y', 'ү': 'y', 'Ұ': 'U', 'ұ': 'u', 'Қ': 'K', 'қ': 'k',
-    'Ң': 'N', 'ң': 'n', 'Ө': 'O', 'ө': 'o', 'Ә': 'A', 'ә': 'a',
-
-    // Greek
-    'Α': 'A', 'Β': 'B', 'Ε': 'E', 'Ζ': 'Z', 'Η': 'H', 'Ι': 'I',
-    'Κ': 'K', 'Μ': 'M', 'Ν': 'N', 'Ο': 'O', 'Ρ': 'P', 'Τ': 'T',
-    'Υ': 'Y', 'Χ': 'X',
-    'α': 'a', 'β': 'b', 'γ': 'y', 'δ': 'd', 'ε': 'e', 'ι': 'i',
-    'κ': 'k', 'μ': 'm', 'ο': 'o', 'ρ': 'p', 'τ': 't', 'υ': 'u',
-    'χ': 'x',
-
-    // Fullwidth Latin
-    'ａ': 'a', 'ｂ': 'b', 'ｃ': 'c', 'ｄ': 'd', 'ｅ': 'e', 'ｆ': 'f',
-    'ｇ': 'g', 'ｈ': 'h', 'ｉ': 'i', 'ｊ': 'j', 'ｋ': 'k', 'ｌ': 'l',
-    'ｍ': 'm', 'ｎ': 'n', 'ｏ': 'o', 'ｐ': 'p', 'ｑ': 'q', 'ｒ': 'r',
-    'ｓ': 's', 'ｔ': 't', 'ｕ': 'u', 'ｖ': 'v', 'ｗ': 'w', 'ｘ': 'x',
-    'ｙ': 'y', 'ｚ': 'z',
-    'Ａ': 'A', 'Ｂ': 'B', 'Ｃ': 'C', 'Ｄ': 'D', 'Ｅ': 'E', 'Ｆ': 'F',
-    'Ｇ': 'G', 'Ｈ': 'H', 'Ｉ': 'I', 'Ｊ': 'J', 'Ｋ': 'K', 'Ｌ': 'L',
-    'Ｍ': 'M', 'Ｎ': 'N', 'Ｏ': 'O', 'Ｐ': 'P', 'Ｑ': 'Q', 'Ｒ': 'R',
-    'Ｓ': 'S', 'Ｔ': 'T', 'Ｕ': 'U', 'Ｖ': 'V', 'Ｗ': 'W', 'Ｘ': 'X',
-    'Ｙ': 'Y', 'Ｚ': 'Z',
-
-    // Superscript / Symbols
-    'ᴀ': 'a', 'ᴄ': 'c', 'ᴅ': 'd', 'ᴇ': 'e', 'ɢ': 'g', 'ʜ': 'h',
-    'ɪ': 'i', 'ᴊ': 'j', 'ᴋ': 'k', 'ʟ': 'l', 'ᴍ': 'm', 'ɴ': 'n',
-    'ᴏ': 'o', 'ᴘ': 'p', 'ǫ': 'q', 'ʀ': 'r', 's': 's', 'ᴛ': 't',
-    'ᴜ': 'u', 'ᴠ': 'v', 'ᴡ': 'w', 'x': 'x', 'ʏ': 'y', 'ᴢ': 'z',
-
-    // Diacritical Latin
-    'ł': 'l', 'Ł': 'L', 'ß': 'ss', 'Þ': 'Th', 'þ': 'th',
-    'Œ': 'OE', 'œ': 'oe', 'Æ': 'AE', 'æ': 'ae',
-    'ñ': 'n', 'Ñ': 'N', 'ç': 'c', 'Ç': 'C', 'ø': 'o', 'Ø': 'O',
-    'å': 'a', 'Å': 'A', 'ð': 'd', 'Ð': 'D', 'ŋ': 'n', 'Ŋ': 'N',
-    'š': 's', 'Š': 'S', 'ž': 'z', 'Ž': 'Z', 'č': 'c', 'Č': 'C',
-    'ď': 'd', 'Ď': 'D', 'ť': 't', 'Ť': 'T', 'ů': 'u', 'Ů': 'U',
-    'ą': 'a', 'Ą': 'A', 'ę': 'e', 'Ę': 'E',
-};
-
-const normalize = (value) => {
-    return value
-        .split('')
-        .map(character => latinMap[character] || character)
-        .join('')
-        .normalize("NFD")
+const cleanString = value =>
+    String(value)
+        .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase()
-        .replace(/[^a-z0-9 ]+/g, '')
-        .replace(/\s+/g, ' ')
-        .trim();
-};
-
-const levenshteinDistance = (lhs, rhs) => {
-    const matrix = Array.from({ length: lhs.length + 1 }, (_, row) =>
-        Array.from({ length: rhs.length + 1 }, (_, col) =>
-            row === 0 ? col : col === 0 ? row : 0
-        )
-    );
-    for (let row = 1; row <= lhs.length; row++) {
-        for (let col = 1; col <= rhs.length; col++) {
-            matrix[row][col] = Math.min(
-                matrix[row - 1][col] + 1,
-                matrix[row][col - 1] + 1,
-                matrix[row - 1][col - 1] + (lhs[row - 1] === rhs[col - 1] ? 0 : 1)
-            );
-        }
-    }
-    return matrix[lhs.length][rhs.length];
-}
-
-const similarityPercent = (lhs, rhs) => {
-    if (!lhs && !rhs) return 100;
-    const distance = levenshteinDistance(lhs, rhs);
-    const maxLength = Math.max(lhs.length, rhs.length);
-    return ((1 - distance / maxLength) * 100).toFixed(2);
-}
-
-const bestMatch = (options, target) => {
-    const normalizedTarget = normalize(target);
-    let bestIndex = -1;
-    let bestScore = -1;
-    for (let index = 0; index < options.length; index++) {
-        const option = options[index];
-        const normalizedOption = normalize(option);
-        if (normalizedOption === normalizedTarget) {
-            console.log(`🔍 [Vấn Đáp] Khớp tuyệt đối: "${target}" = "${option}"`);
-            return index;
-        }
-        const score = parseFloat(similarityPercent(normalizedOption, normalizedTarget));
-        if (score > bestScore) {
-            bestIndex = index;
-            bestScore = score;
-        }
-    }
-    console.log(`🔍 [Vấn Đáp] So sánh: "${target}" ≈ "${options[bestIndex]}" ➜ giống nhau ${bestScore}%`);
-    return bestIndex;
-}
+        .replace(/[^\p{L}\p{N}]+/gu, '')
+        .replace(/\s+/g, '')
+        .toLowerCase();
 
 const getRequestData = (html) => {
     return [...html.matchAll(/data\s*(?:=|:)\s*{([\s\S]*?)}/g)]
@@ -497,8 +368,7 @@ async function openChestPL() {
 // Thí Luyện Tông Môn
 async function getRemainingTimeTLTM(security) {
     if (!security) {
-        console.log('<Logger>', `🔴 [Thí Luyện Tông Môn] - Không tìm thấy security get_remaining_time_tltm`);
-        return null;
+        return console.log('<Logger>', `🔴 [Thí Luyện Tông Môn] - Không tìm thấy security get_remaining_time_tltm`);
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -544,7 +414,7 @@ async function openChestTLTM() {
 // Vấn Đáp
 async function runQuiz() {
     const bank = Object.fromEntries(
-        Object.entries(quizBank).map(([key, value]) => [normalize(key), value])
+        Object.entries(quizBank).map(([key, value]) => [cleanString(key), cleanString(value)])
     );
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -565,10 +435,13 @@ async function runQuiz() {
         } else if (correct === 2) {
             console.log(`❌ [Vấn Đáp] - Câu ${index + 1}`);
         } else {
-            const question = normalize(value.question);
+            const question = cleanString(value.question);
             const answer = bank[question] ?? '';
-            const options = value.options.map(option => typeof option === 'string' ? option : option.content);
-            const answerIndex = Math.max(0, Math.min(3, bestMatch(options, answer)));
+            let answerIndex = value.options.findIndex(option => cleanString(option) === answer);
+            if (answerIndex === -1) {
+                console.log(`⚠️ [Vấn Đáp] - Không tìm thấy đáp án câu ${index + 1}, lựa chọn câu đầu tiên.`);
+                answerIndex = 0;
+            }
             await saveQuizResult(value.id, answerIndex, index);
             await new Promise(resolve => setTimeout(resolve, 250));
         }
@@ -628,7 +501,7 @@ async function claimDailyActivityReward() {
             ? `✅ [Hoạt Động Hằng Ngày] - Nhận thành công - ${stage}`
             : `❌ [Hoạt Động Hằng Ngày] - Nhận thất bại - ${result.data?.message}`
         console.log(message);
-        return !!result.success;
+        return !!message.success;
     };
 
     const page = await loadPage(DOMAIN + '/bang-hoat-dong-ngay');
@@ -1114,8 +987,8 @@ async function claimDoThachReward(requestData) {
         })
     });
     const message = result.success
-        ? `🟢 [Đổ Thạch] - Nhận thưởng thành công - ${result.data?.message}`
-        : `🔴 [Đổ Thạch] - ${result.data?.message}`;
+        ? `🟢 [Đổ Thạch] - Nhận thưởng thành công - ${result.data}`
+        : `🔴 [Đổ Thạch] - ${result.data}`;
     console.log('<Logger>', message);
 }
 
@@ -1138,7 +1011,7 @@ async function loadDoThachData(requestData) {
         return [];
     };
     if (!is_reward_time) return stones;
-    const rewardStone = stones.find(stone => stone.stone_id == winning_stone_id && stone.bet_placed === true);
+    const rewardStone = stones.find(stone => stone.id == winning_stone_id && stone.bet_placed === true);
     if (!rewardStone) {
         console.log('<Logger>', `🟡 [Đổ Thạch] - Không có thưởng!`);
         return [];
@@ -1171,17 +1044,12 @@ async function placeDoThachBet(requestData, stone, amount = 20) {
     console.log('<Logger>', message);
 }
 
-async function autoDoThach(indices, amount = 2) {
+async function autoDoThach(indices, amount = 20) {
     const page = await loadPage(DOMAIN + '/do-thach-hh3d');
     const requestData = getRequestData(page.html);
     const hasGift = page.doc.querySelector('.custom-button.gift-button');
     if (hasGift) {
         await giveNewbieGift(requestData);
-    };
-    const hasReward = page.doc.querySelector('#claim-reward-button');
-    if (hasReward) {
-        await claimDoThachReward(requestData);
-        return await autoDoThach(indices, amount);
     };
     const stones = await loadDoThachData(requestData);
     if (stones.length === 0) return;
@@ -1191,8 +1059,6 @@ async function autoDoThach(indices, amount = 2) {
         if (stone.bet_placed === false) {
             await placeDoThachBet(requestData, stone, amount);
             await new Promise(resolve => setTimeout(resolve, 250));
-        } else {
-            console.log(`[Đổ Thạch] - Đã dặt cược vào ${stone.name} (x${stone.reward_multiplier})`);
         };
     };
 }
@@ -1219,7 +1085,7 @@ const bets = [1, 2];
 // ➤ false = Tắt tự động nhận khiêu chiến.
 const battleAutoOn = true;
 
-// Tùy chọn gửi khiêu chiến trong Luận Võ - `online` (true hoặc false) - `retry` (số).
+// Tùy chọn gửi khiêu chiến trong Luận Võ - online (true hoặc false) - retry (số).
 // ➤ online: false = Không tự động tìm đánh người Online khi lượt gửi người Theo dõi chưa đạt tối đa.
 // ➤ online: true = Tự động tìm đánh người Online khi lượt gửi người Theo dõi chưa đạt tối đa.
 // ➤ retry: 3 = Số lần tải lại danh sách người Online.
@@ -1227,7 +1093,7 @@ const battleOptions = { online: false, retry: 3 };
 
 // Danh sách code cần nhập trong Linh Thạch (text).
 // ➤ Ví dụ: ["HH3D", "LINHTHACH"] hoặc  ['HH3D', 'LINHTHACH']
-const codes = ['CAOLOITIENDUYEN', 'TIENDUYEN', 'HAPTHULINHTHACH'];
+const codes = [];
 
 (async () => {
     if (tasks.includes(1)) {
