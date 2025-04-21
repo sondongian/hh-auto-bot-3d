@@ -1176,7 +1176,7 @@ const battleAutoOn = true;
 // ➤ online: false = Không tự động tìm đánh người Online khi lượt gửi người Theo dõi chưa đạt tối đa.
 // ➤ online: true = Tự động tìm đánh người Online khi lượt gửi người Theo dõi chưa đạt tối đa.
 // ➤ retry: 3 = Số lần tải lại danh sách người Online.
-const battleOptions = { online: false, retry: 3 };
+const battleOptions = { online: true, retry: 3 };
 
 // Danh sách code cần nhập trong Linh Thạch (text).
 // ➤ Ví dụ: ["HH3D", "LINHTHACH"] hoặc  ['HH3D', 'LINHTHACH']
