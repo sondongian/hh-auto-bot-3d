@@ -503,7 +503,6 @@ async function claimDailyActivityReward() {
     await attackBoss();
     await openChestPL();
     await openChestTLTM();
-    await runQuiz();
     await teLeTongMon();
     await claimDailyActivityReward();
 })();
