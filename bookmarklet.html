@@ -2,12 +2,12 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <title>🚀 HH3D - Bookmarklet Auto Script 🚀</title>
+  <title>🚀 HH3D - Bookmarklet Auto Script</title>
   <style>
     body {
       font-family: 'Segoe UI', Roboto, sans-serif;
       padding: 40px;
-      background: #f5f7fa;
+      background: #f4f7fa;
       color: #333;
       line-height: 1.6;
       max-width: 600px;
@@ -16,7 +16,7 @@
     h1 {
       color: #d63384;
     }
-    a.bookmarklet {
+    a.bookmarklet, button.purge-button {
       display: inline-block;
       padding: 12px 20px;
       background: #0d6efd;
@@ -25,9 +25,13 @@
       text-decoration: none;
       border-radius: 6px;
       font-size: 16px;
+      margin-right: 10px;
+      margin-top: 15px;
+      border: none;
+      cursor: pointer;
       transition: background 0.3s ease;
     }
-    a.bookmarklet:hover {
+    a.bookmarklet:hover, button.purge-button:hover {
       background: #084298;
     }
     .note {
@@ -41,23 +45,54 @@
       border-radius: 4px;
       font-size: 13px;
     }
+    .log {
+      margin-top: 20px;
+      font-family: monospace;
+      font-size: 14px;
+      background: #eef1f5;
+      padding: 10px;
+      border-left: 4px solid #0d6efd;
+      white-space: pre-wrap;
+    }
   </style>
 </head>
 <body>
-  <h1>🚀 HH3D - Bookmarklet</h1>
+  <h1>🚀 HH3D - Bookmarklet Vấn Đáp</h1>
   <p>
-    Kéo nút bên dưới vào thanh bookmarks hoặc bấm để sao chép.  
-    Mỗi lần chạy sẽ:
+    Kéo nút bên dưới lên thanh bookmarks hoặc click để dùng trực tiếp:
   </p>
-  <ul>
-    <li>🔄 Gửi yêu cầu <code>purge</code> đến JSDelivr để xóa cache</li>
-    <li>🆕 Tải script mới nhất từ GitHub CDN</li>
-  </ul>
-  
-  <a class="bookmarklet" href="javascript:(()=>{fetch('https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/main.min.js').then(()=>console.log('✅ Purged JSDelivr cache.')).catch(()=>console.warn('⚠️ Purge request failed.'));const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/main.min.js?t='+Date.now();document.body.appendChild(s);})();">▶️ Kích hoạt Hoạt Động mới nhất</a>
-  <a class="bookmarklet" href="javascript:(()=>{fetch('https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/vandapnew.min.js').then(()=>console.log('✅ Purged JSDelivr cache.')).catch(()=>console.warn('⚠️ Purge request failed.'));const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/vandapnew.min.js?t='+Date.now();document.body.appendChild(s);})();">🧠 Kích hoạt Vấn Đáp mới nhất</a>
 
-  <p class="note">💡Code sẻ được Update liên tục</p>
-  <p class="note">❌Không được phép share ra bên ngoài. Nếu phát hiện sẻ đóng vĩnh viễn.</p>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/vandapnew.min.js?t='+Date.now();document.body.appendChild(s);})();">▶️ Kích hoạt Vấn Đáp mới nhất</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/main.min.js?t='+Date.now();document.body.appendChild(s);})();">▶️ Kích hoạt Hoạt Động mới nhất</a>
+  <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
+
+  <div id="log" class="log" hidden></div>
+
+  <p class="note">
+    💡 Bookmarklet luôn tải phiên bản mới nhất từ GitHub.  
+    Dùng nút xoá cache khi bạn vừa cập nhật file <code>code.min.js</code>.
+  </p>
+
+  <script>
+    function purgeCDN() {
+  const urls = [
+    'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/vandapnew.min.js',
+    'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/main.min.js'
+  ];
+  const logEl = document.getElementById('log');
+  logEl.hidden = false;
+  logEl.textContent = '🔄 Đang gửi yêu cầu xoá cache...';
+
+  Promise.all(
+    urls.map(url =>
+      fetch(url)
+        .then(() => `✅ Purged: ${url}`)
+        .catch(err => `❌ Lỗi: ${url} (${err.message})`)
+    )
+  ).then(results => {
+    logEl.textContent = results.join('\n');
+  });
+}
+  </script>
 </body>
 </html>
