@@ -4,35 +4,50 @@
   <meta charset="UTF-8" />
   <title>🚀 HH3D - Bookmarklet Auto 🚀</title>
   <style>
+    :root {
+      --bg-color: #f4f7fa;
+      --text-color: #333;
+      --button-bg: #0d6efd;
+      --button-hover: #084298;
+      --log-bg: #eef1f5;
+    }
+    body.dark {
+      --bg-color: #1e1e2f;
+      --text-color: #f1f1f1;
+      --button-bg: #3a72f2;
+      --button-hover: #2046aa;
+      --log-bg: #2b2d42;
+    }
+
     body {
       font-family: 'Segoe UI', Roboto, sans-serif;
       padding: 40px;
-      background: #f4f7fa;
-      color: #333;
+      background: var(--bg-color);
+      color: var(--text-color);
       line-height: 1.6;
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
+      transition: all 0.3s ease;
     }
     h1 {
       color: #d63384;
     }
-    a.bookmarklet, button.purge-button {
+    a.bookmarklet, button.purge-button, button.toggle-dark {
       display: inline-block;
       padding: 12px 20px;
-      background: #0d6efd;
+      background: var(--button-bg);
       color: white;
       font-weight: bold;
       text-decoration: none;
       border-radius: 6px;
       font-size: 16px;
-      margin-right: 10px;
-      margin-top: 15px;
+      margin: 10px 10px 0 0;
       border: none;
       cursor: pointer;
       transition: background 0.3s ease;
     }
-    a.bookmarklet:hover, button.purge-button:hover {
-      background: #084298;
+    a.bookmarklet:hover, button.purge-button:hover, button.toggle-dark:hover {
+      background: var(--button-hover);
     }
     .note {
       color: #777;
@@ -49,9 +64,9 @@
       margin-top: 20px;
       font-family: monospace;
       font-size: 14px;
-      background: #eef1f5;
+      background: var(--log-bg);
       padding: 10px;
-      border-left: 4px solid #0d6efd;
+      border-left: 4px solid var(--button-bg);
       white-space: pre-wrap;
     }
   </style>
@@ -59,48 +74,55 @@
 <body>
   <h1>🚀 HH3D - Bookmarklet 🚀</h1>
   <p>
-    ⬇ Kéo nút bên dưới lên thanh ➡️ bookmarks ⬆️: <br>
-    ⚠️Lưu ý: Để nào nút bên dưới ⬇ giử chuột trái 🖱  và kéo lên thank ➡️ bookmarks ⬆️.
+    ⬇ Kéo các nút bên dưới lên thanh ➡️ bookmarks ⬆️: <br>
+    ⚠️ Giữ chuột trái 🖱 và kéo lên thanh bookmarks để lưu.
   </p>
 
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/vandapnew.min.js?t='+Date.now();document.body.appendChild(s);})();">🧠Vấn Đáp</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/main.min.js?t='+Date.now();document.body.appendChild(s);})();">▶️Hoạt Động</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/tienduyen.min.js?t='+Date.now();document.body.appendChild(s);})();">💝Tiên Duyên</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhd.min.js?t='+Date.now();document.body.appendChild(s);})();">🔀Full Hoạt Động</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/vandapnew.min.js?t='+Date.now();document.body.appendChild(s);})();">🧠 Vấn Đáp</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/main.min.js?t='+Date.now();document.body.appendChild(s);})();">▶️ Hoạt Động</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/tienduyen.min.js?t='+Date.now();document.body.appendChild(s);})();">💝 Tiên Duyên</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhd.min.js?t='+Date.now();document.body.appendChild(s);})();">🔀 Full Hoạt Động</a>
+
+  <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
+  <button class="toggle-dark" onclick="toggleDarkMode()">🌙 Chuyển Dark Mode</button>
 
   <div id="log" class="log" hidden></div>
 
   <p class="note">
-    💡 Bookmarklet luôn tải phiên bản mới nhất từ GitHub.   <br>
-    🧹 Dùng nút xoá cache khi bạn vừa cập nhật file <code>code.min.js</code>. <br>
-    ❌ Không share ra ngoài với bất kỳ hình thức nào.  <br>
-    🛑 Bookmarklet sẻ bị đóng vĩnh viễn. <br>
-    ©️ Bốn Lù <br>
+    💡 Các script luôn tải phiên bản mới nhất từ GitHub. <br>
+    🧹 Dùng nút xoá cache nếu bạn vừa cập nhật các file `.min.js`. <br>
+    ❌ Không chia sẻ công khai. <br>
+    🛑 Bookmarklet sẽ bị thu hồi nếu bị phát tán. <br>
+    ©️ Bốn Lù
   </p>
 
   <script>
     function purgeCDN() {
-  const urls = [
-    'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/vandapnew.min.js',
-    'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/main.min.js',
-    'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/tienduyen.min.js'
-    'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhd.min.js'
-  ];
-  const logEl = document.getElementById('log');
-  logEl.hidden = false;
-  logEl.textContent = '🔄 Đang gửi yêu cầu xoá cache...';
+      const urls = [
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/vandapnew.min.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/main.min.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/tienduyen.min.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhd.min.js'
+      ];
+      const logEl = document.getElementById('log');
+      logEl.hidden = false;
+      logEl.textContent = '🔄 Đang gửi yêu cầu xoá cache...';
 
-  Promise.all(
-    urls.map(url =>
-      fetch(url)
-        .then(() => `✅ Purged: ${url}`)
-        .catch(err => `❌ Lỗi: ${url} (${err.message})`)
-    )
-  ).then(results => {
-    logEl.textContent = results.join('\n');
-  });
-}
+      Promise.all(
+        urls.map(url =>
+          fetch(url)
+            .then(() => `✅ Purged: ${url}`)
+            .catch(err => `❌ Lỗi: ${url} (${err.message})`)
+        )
+      ).then(results => {
+        logEl.textContent = results.join('\n');
+      });
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
   </script>
 </body>
 </html>
