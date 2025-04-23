@@ -65,6 +65,7 @@
 
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/vandapnew.min.js?t='+Date.now();document.body.appendChild(s);})();">🧠 Kích hoạt Vấn Đáp mới nhất</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/main.min.js?t='+Date.now();document.body.appendChild(s);})();">▶️ Kích hoạt Hoạt Động mới nhất</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/tienduyen.min.js?t='+Date.now();document.body.appendChild(s);})();">💝 Kích hoạt Hoạt Động mới nhất</a>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
 
   <div id="log" class="log" hidden></div>
@@ -81,7 +82,8 @@
     function purgeCDN() {
   const urls = [
     'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/vandapnew.min.js',
-    'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/main.min.js'
+    'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/main.min.js',
+    'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/tienduyen.min.js'
   ];
   const logEl = document.getElementById('log');
   logEl.hidden = false;
