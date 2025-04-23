@@ -1,5 +1,5 @@
 (async function runQuiz () {
-  const DOMAIN          = 'https://hoathinh3d.team';
+  const DOMAIN          = 'https://hoathinh3d.cam';
   const HH3D_AJAX_URL   = DOMAIN + '/wp-content/themes/halimmovies-child/hh3d-ajax.php';
   const todayStr        = new Date().toISOString().slice(0, 10);
 
