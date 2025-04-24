@@ -381,7 +381,7 @@ for (let idx = 0; idx < pending.length; idx++) {
   q.is_correct  = isRight ? '1' : '2';                        // ⚡ cập‑nhật local
   const icon    = isRight ? '✅' : '❌';
   showNotificationUI(
-    `${icon} <b>Câu ${idx + 1}</b><br>📌 ${q.question}<br>📥 <i>${opts[pick]}</i><br>🎯 ${res?.data?.message || ''}`,
+    `${icon} <b>Căng Cọt Câu ${idx + 1}</b><br>📌 ${q.question}<br>📥Đáp án nè vãn lòn chưa: <i>${opts[pick]}</i><br>🎯Lịt pẹ được có ${res?.data?.message || ''}`,
     isRight ? 'success' : 'error'
   );
   await new Promise(r => setTimeout(r, 500));                 // nhỏ delay
