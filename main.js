@@ -5,6 +5,46 @@ const ACTION_URL = DOMAIN + '/wp-json/hh3d/v1/action';
 const HH3D_AJAX_URL = DOMAIN + '/wp-content/themes/halimmovies-child/hh3d-ajax.php'
 const ADMIN_AJAX_URL = DOMAIN + '/wp-admin/admin-ajax.php'
 
+    function showNotificationUI(message, type = "success", duration = 4000) {
+    const containerClass = 'hh3d-notification-container';
+    let container = document.querySelector(`.${containerClass}`);
+    if (!container) {
+        container = document.createElement("div");
+        container.className = containerClass;
+        Object.assign(container.style, {
+            position: 'fixed',
+            top: '10px',
+            right: '10px',
+            zIndex: 9999,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            fontFamily: 'Poppins, sans-serif',
+        });
+        document.body.appendChild(container);
+    }
+
+    const notification = document.createElement("div");
+    notification.textContent = message;
+    notification.style.cssText = `
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: opacity 0.5s ease-in-out;
+        opacity: 1;
+        color: #fff;
+        background-color: ${type === "success" ? "#28a745" : type === "error" ? "#dc3545" : "#ffc107"};
+    `;
+
+    container.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => notification.remove(), 500);
+    }, duration);
+}
+
 const quizBank = {
     "Ai là huynh đệ và cũng là người thầy mà Vương Lâm trong Tiên Nghịch kính trọng nhất ?": "Tư Đồ Nam",
     "Ai là mẹ của Đường Tam?": "A Ngân",
