@@ -393,7 +393,7 @@ for (let idx = 0; idx < pending.length; idx++) {
 const correctCnt = questions.filter(q => q.is_correct === '1').length;
 
 if (correctCnt === 5) {
-  showNotificationUI('[Quiz Notification] 🎉 Đã hoàn thành toàn bộ Vấn đáp.', 'success');
+  showNotificationUI('Vấp Đáp 🎉 Đã hoàn thành toàn bộ Vấn đáp. Đòi làm thêm có cái L chứ làm Cút', 'success');
   // Gắn flag CHỈ khi hoàn tất
   try { chrome?.storage?.local?.set?.({ quizDone: todayStr }); } catch {}
 } else {
