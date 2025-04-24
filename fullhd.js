@@ -1,7 +1,47 @@
-const DOMAIN = 'https://hoathinh3d.team';
+const DOMAIN = 'https://hoathinh3d.cam';
 const ACTION_URL = DOMAIN + '/wp-json/hh3d/v1/action';
 const HH3D_AJAX_URL = DOMAIN + '/wp-content/themes/halimmovies-child/hh3d-ajax.php'
 const ADMIN_AJAX_URL = DOMAIN + '/wp-admin/admin-ajax.php'
+
+function showNotificationUI(message, type = "success", duration = 4000) {
+    const containerClass = 'hh3d-notification-container';
+    let container = document.querySelector(`.${containerClass}`);
+    if (!container) {
+        container = document.createElement("div");
+        container.className = containerClass;
+        Object.assign(container.style, {
+            position: 'fixed',
+            top: '10px',
+            right: '10px',
+            zIndex: 9999,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            fontFamily: 'Poppins, sans-serif',
+        });
+        document.body.appendChild(container);
+    }
+
+    const notification = document.createElement("div");
+    notification.textContent = message;
+    notification.style.cssText = `
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: opacity 0.5s ease-in-out;
+        opacity: 1;
+        color: #fff;
+        background-color: ${type === "success" ? "#28a745" : type === "error" ? "#dc3545" : "#ffc107"};
+    `;
+
+    container.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => notification.remove(), 500);
+    }, duration);
+}
 
 const quizBank = {
     "Ai là huynh đệ và cũng là người thầy mà Vương Lâm trong Tiên Nghịch kính trọng nhất ?": "Tư Đồ Nam",
@@ -303,7 +343,7 @@ const bestMatch = (options, target) => {
             bestScore = score;
         }
     }
-    console.log('<Logger>', `🔐 target: ${target} - result: ${options[bestIndex]} (${bestScore})`);
+    showNotificationUI( `🔐 target: ${target} - result: ${options[bestIndex]} (${bestScore})`);
     return bestIndex;
 }
 
@@ -324,7 +364,7 @@ const postRequest = async (url, { headers, body }) => {
         const response = await fetch(url, { method: 'POST', headers, body });
         return await response.json();
     } catch (error) {
-        console.error('<Logger>', `🔴 POST: ${url} - ${error}`);
+        console.error( `🔴 POST: ${url} - ${error}`);
         return { success: false, error: error };
     }
 };
@@ -340,7 +380,7 @@ const loadPage = async (url) => {
 async function checkIn() {
     const nonce = Better_Messages.nonce;
     if (!nonce) {
-        return console.log('<Logger>', `🔴 [Điểm Danh] - Không tìm thấy nonce daily_check_in`);
+        return showNotificationUI( `🔴 [Điểm Danh] - Không tìm thấy nonce daily_check_in`);
     };
     const result = await postRequest(ACTION_URL, {
         headers: {
@@ -352,13 +392,13 @@ async function checkIn() {
     const message = result.success
         ? `🟢 [Điểm Danh] - Thành công.`
         : `🟡 [Điểm Danh] - ${result.message}`;
-    console.log('<Logger>', message);
+        showNotificationUI( message);
 }
 
 // Hoang Vực
 async function claimBossChest(nonce) {
     if (!nonce) {
-        return console.log('<Logger>', `🔴 [Hoang Vực] - Không tìm thấy nonce claim_chest`);
+        return showNotificationUI( `🔴 [Hoang Vực] - Không tìm thấy nonce claim_chest`);
     };
     const result = await postRequest(ADMIN_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -368,16 +408,16 @@ async function claimBossChest(nonce) {
         })
     });
     if (result.error) {
-        return console.log('<Logger>', `🔴 [Hoang Vực] - ${result.error}`);
+        return showNotificationUI( `🔴 [Hoang Vực] - ${result.error}`);
     };
-    console.log('<Logger>', `🟢 [Hoang Vực] - Nhận thưởng thành công.`);
+    showNotificationUI( `🟢 [Hoang Vực] - Nhận thưởng thành công.`);
     const rewards = result.total_rewards || {};
     const rewardLogs = [];
     if (rewards.tu_vi) rewardLogs.push(`✨ Tu Vi: ${rewards.tu_vi}`);
     if (rewards.tinh_thach) rewardLogs.push(`💎 Tinh Thạch: ${rewards.tinh_thach}`);
     if (rewards.tinh_huyet) rewardLogs.push(`🩸 Tinh Huyết: ${rewards.tinh_huyet}`);
     if (rewardLogs.length) {
-        console.log(rewardLogs.join(' | '));
+        showNotificationUI(rewardLogs.join(' | '));
     }
 }
 
@@ -392,10 +432,10 @@ async function attackBoss() {
     }
     const bossId = page.html.match(/boss_id\s*==\s*"(\d+)"/)?.[1];
     if (!nonce) {
-        return console.log('<Logger>', `🔴 [Hoang Vực] - Không tìm thấy nonce attack_boss`);
+        return showNotificationUI( `🔴 [Hoang Vực] - Không tìm thấy nonce attack_boss`);
     };
     if (!bossId) {
-        return console.log('<Logger>', `🔴 [Hoang Vực] - Không tìm thấy bossId attack_boss`);
+        return showNotificationUI( `🔴 [Hoang Vực] - Không tìm thấy bossId attack_boss`);
     };
     const requestId = 'req_' + Math.random().toString(36).slice(2, 11) + '_' + Date.now();
     const result = await postRequest(HH3D_AJAX_URL, {
@@ -410,7 +450,7 @@ async function attackBoss() {
     const message = result.success
         ? '🟢 [Hoang Vực] - Tấn công thành công.'
         : `🟡 [Hoang Vực] - Tấn công thất bại - ${result.data?.error}`;
-    console.log('<Logger>', message);
+    showNotificationUI( message);
 }
 
 // Phúc Lợi Đường
@@ -424,7 +464,7 @@ async function claimBonusReward(page) {
                 security
             })
         });
-        console.log(`${result.success ? '✅' : '❌'} [Phúc Lợi Đường] - ${result.data?.message}`);
+        showNotificationUI(`${result.success ? '✅' : '❌'} [Phúc Lợi Đường] - ${result.data?.message}`);
         return !!result.success;
     };
 
@@ -446,7 +486,7 @@ async function claimBonusReward(page) {
     const requestData = getRequestData(page.html);
     const security = requestData.find(value => value.action === 'claim_bonus_reward')?.security;
     if (!security) {
-        return console.log('<Logger>', `🔴 [Phúc Lợi Đường] - Không tìm thấy security claim_bonus_reward`);
+        return showNotificationUI( `🔴 [Phúc Lợi Đường] - Không tìm thấy security claim_bonus_reward`);
     }
     for (const id of ids) {
         if (await claimRequest(id, security) && Number(id) === 3) {
@@ -459,7 +499,7 @@ async function claimBonusReward(page) {
 
 async function getNextTimePL(security) {
     if (!security) {
-        return console.log('<Logger>', `🔴 [Phúc Lợi Đường] - Không tìm thấy security get_next_time_pl`);
+        return showNotificationUI( `🔴 [Phúc Lợi Đường] - Không tìm thấy security get_next_time_pl`);
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -472,14 +512,14 @@ async function getNextTimePL(security) {
     const time = result.data?.time;
     if (result.success && !isNaN(level)) {
         if (level === 4) {
-            console.log('<Logger>', `🟢 [Phúc Lợi Đường] - Đã mở đủ 4 rương.`);
+            showNotificationUI( `🟢 [Phúc Lợi Đường] - Đã mở đủ 4 rương.`);
         } else if (time !== '00:00') {
-            console.log('<Logger>', `🟡 [Phúc Lợi Đường] - Chưa đến thời gian mở | ${time}`);
+            showNotificationUI( `🟡 [Phúc Lợi Đường] - Chưa đến thời gian mở | ${time}`);
         } else {
             return level + 1;
         }
     } else {
-        return console.log('<Logger>', `🔴 [Phúc Lợi Đường] - Không lấy được dữ liệu get_next_time_pl`);
+        return showNotificationUI( `🔴 [Phúc Lợi Đường] - Không lấy được dữ liệu get_next_time_pl`);
     }
     return null
 }
@@ -491,7 +531,7 @@ async function openChestPL() {
     const next = await getNextTimePL(security);
     if (next === null) return;
     if (!security) {
-        return console.log('<Logger>', `🔴 [Phúc Lợi Đường] - Không tìm thấy security open_chest_pl`);
+        return showNotificationUI( `🔴 [Phúc Lợi Đường] - Không tìm thấy security open_chest_pl`);
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -504,13 +544,13 @@ async function openChestPL() {
     const message = result.success
         ? `🟢 [Phúc Lợi Đường] - Rương ${next} - ${result.data?.message}`
         : `🟡 [Phúc Lợi Đường] - Không thành công - ${result.data?.message}`;
-    console.log('<Logger>', message);
+    showNotificationUI( message);
 }
 
 // Thí Luyện Tông Môn
 async function getRemainingTimeTLTM(security) {
     if (!security) {
-        return console.log('<Logger>', `🔴 [Thí Luyện Tông Môn] - Không tìm thấy security get_remaining_time_tltm`);
+        return showNotificationUI( `🔴 [Thí Luyện Tông Môn] - Không tìm thấy security get_remaining_time_tltm`);
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -522,12 +562,12 @@ async function getRemainingTimeTLTM(security) {
     const time = result.data?.time_remaining;
     if (result.success) {
         if (time !== '00:00') {
-            console.log('<Logger>', `🟡 [Thí Luyện Tông Môn] - Chưa đến thời gian mở | ${time}`);
+            showNotificationUI( `🟡 [Thí Luyện Tông Môn] - Chưa đến thời gian mở | ${time}`);
         } else {
             return time;
         }
     } else {
-        return console.log('<Logger>', `🔴 [Thí Luyện Tông Môn] - Không lấy được dữ liệu get_next_time_pl`);
+        return showNotificationUI( `🔴 [Thí Luyện Tông Môn] - Không lấy được dữ liệu get_next_time_pl`);
     }
     return null;
 }
@@ -538,7 +578,7 @@ async function openChestTLTM() {
     const next = await getRemainingTimeTLTM(security);
     if (next === null) return;
     if (!security) {
-        return console.log('<Logger>', `🔴 [Thí Luyện Tông Môn] - Không tìm thấy security open_chest_tltm`);
+        return showNotificationUI( `🔴 [Thí Luyện Tông Môn] - Không tìm thấy security open_chest_tltm`);
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -550,7 +590,7 @@ async function openChestTLTM() {
     const message = result.success
         ? `🟢 [Thí Luyện Tông Môn] - Mở thành công - ${result.data?.message}`
         : `🟡 [Thí Luyện Tông Môn] - ${result.data?.message}`;
-    console.log('<Logger>', message);
+    showNotificationUI( message);
 }
 
 // Vấn Đáp
@@ -565,17 +605,17 @@ async function runQuiz() {
     const { success, data } = result || {};
     const { questions, completed } = data || {};
     if (!success || !data || !questions) {
-        return console.log('<Logger>', `🔴 [Vấn Đáp] - Không lấy được dữ liệu load_quiz_data`);
+        return showNotificationUI( `🔴 [Vấn Đáp] - Không lấy được dữ liệu load_quiz_data`);
     }
     if (completed) {
-        return console.log('<Logger>', '🟡 [Vấn Đáp] - Đã hoàn thành!');
+        return showNotificationUI( '🟡 [Vấn Đáp] - Đã hoàn thành!');
     }
     for (const [index, value] of questions.entries()) {
         const correct = parseInt(value.is_correct, 10) || 0;
         if (correct === 1) {
-            console.log(`✅ [Vấn Đáp] - Câu ${index + 1}`);
+            showNotificationUI(`✅ [Vấn Đáp] - Câu ${index + 1}`);
         } else if (correct === 2) {
-            console.log(`❌ [Vấn Đáp] - Câu ${index + 1}`);
+            showNotificationUI(`❌ [Vấn Đáp] - Câu ${index + 1}`);
         } else {
             const question = normalize(value.question);
             const answer = bank[question] ?? '';
@@ -585,7 +625,7 @@ async function runQuiz() {
             await new Promise(resolve => setTimeout(resolve, 250));
         }
     };
-    console.log('<Logger>', `🟢 [Vấn Đáp] - Đã hoàn thành.`);
+    showNotificationUI( `🟢 [Vấn Đáp] - Đã hoàn thành.`);
 }
 
 async function saveQuizResult(question_id, answer, index) {
@@ -601,9 +641,9 @@ async function saveQuizResult(question_id, answer, index) {
         const message = parseInt(result.data?.is_correct, 10) === 1
             ? `✅ [Vấn Đáp] - Câu ${index + 1}`
             : `❌ [Vấn Đáp] - Câu ${index + 1}`;
-        console.log(message);
+        showNotificationUI(message);
     } else {
-        console.log('<Logger>', `🔴 [Vấn Đáp] - Chưa trả lời câu ${index + 1}`);
+        showNotificationUI( `🔴 [Vấn Đáp] - Chưa trả lời câu ${index + 1}`);
     }
 }
 
@@ -611,7 +651,7 @@ async function saveQuizResult(question_id, answer, index) {
 async function teLeTongMon() {
     const nonce = Better_Messages.nonce;
     if (!nonce) {
-        return console.log('<Logger>', `🔴 [Tế Lễ] - Không tìm thấy nonce te_le_tong_mon`);
+        return showNotificationUI( `🔴 [Tế Lễ] - Không tìm thấy nonce te_le_tong_mon`);
     };
     const result = await postRequest(ADMIN_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -623,7 +663,7 @@ async function teLeTongMon() {
     const message = result.success
         ? `🟢 [Tế Lễ] - Thành công.`
         : `🟡 [Tế Lễ] - ${result.data}`;
-    console.log('<Logger>', message);
+        showNotificationUI( message);
 }
 
 // Hoạt Động Hằng Ngày
@@ -639,7 +679,7 @@ async function claimDailyActivityReward() {
         const message = result.success
             ? `✅ [Hoạt Động Hằng Ngày] - Nhận thành công - ${stage}`
             : `❌ [Hoạt Động Hằng Ngày] - Nhận thất bại - ${result.data?.message}`
-        console.log(message);
+        showNotificationUI(message);
         return !!result.success;
     };
 
@@ -658,7 +698,7 @@ async function claimDailyActivityReward() {
             };
         }
     }
-    console.log('<Logger>', `🟢 [Hoạt Động Hằng Ngày] - Đã nhận ${count}`);
+    showNotificationUI( `🟢 [Hoạt Động Hằng Ngày] - Đã nhận ${count}`);
 }
 
 // Luận Võ
@@ -673,7 +713,7 @@ async function handleFollow({ ids, clean = false }) {
     };
     const currentId = parseInt(data.current_user_id);
     if (!data.nonce) {
-        return console.log('<Logger>', `🔴 [Luận Võ] - Không tìm thấy nonce handle_follow`);
+        return showNotificationUI( `🔴 [Luận Võ] - Không tìm thấy nonce handle_follow`);
     };
     for (const id of ids) {
         if (id === currentId) continue;
@@ -688,10 +728,10 @@ async function handleFollow({ ids, clean = false }) {
         const message = result.success
             ? `✅ [Luận Võ] - Theo dõi thành công ID: ${id}`
             : `❌ [Luận Võ] - Theo dõi thất bại ID: ${id}`;
-        console.log(message);
+            showNotificationUI(message);
         await new Promise(resolve => setTimeout(resolve, 250));
     }
-    console.log('<Logger>', `🟢 [Luận Võ] - Hoàn thành xử lý theo dõi.`);
+    showNotificationUI( `🟢 [Luận Võ] - Hoàn thành xử lý theo dõi.`);
 }
 
 async function handleUnfollow(users) {
@@ -700,7 +740,7 @@ async function handleUnfollow(users) {
     const match = script?.match(/\{[\s\S]*\}/);
     const data = match ? JSON.parse(match[0].replace(/\\\//g, '/')) : {};
     if (!data.nonce) {
-        return console.log('<Logger>', `🔴 [Luận Võ] - Không tìm thấy nonce handle_unfollow`);
+        return showNotificationUI( `🔴 [Luận Võ] - Không tìm thấy nonce handle_unfollow`);
     };
     const currentId = parseInt(data.current_user_id);
     for (const user of users) {
@@ -717,15 +757,15 @@ async function handleUnfollow(users) {
         const message = result.success
             ? `✅ [Luận Võ] - Hủy theo dõi thành công ID: ${id}`
             : `❌ [Luận Võ] - Hủy theo dõi thất bại ID: ${id}`;
-        console.log(message);
+            showNotificationUI(message);
         await new Promise(resolve => setTimeout(resolve, 250));
     }
-    console.log('<Logger>', `🟢 [Luận Võ] - Hoàn thành xử lý hủy theo dõi.`);
+    showNotificationUI( `🟢 [Luận Võ] - Hoàn thành xử lý hủy theo dõi.`);
 }
 
 async function getUsers({ action, nonce, page = 1, current = [], loadmore }) {
     if (!nonce) {
-        return console.log('<Logger>', `🔴 [Luận Võ] - Không tìm thấy nonce ${action}`);
+        return showNotificationUI( `🔴 [Luận Võ] - Không tìm thấy nonce ${action}`);
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -759,7 +799,7 @@ async function getUsers({ action, nonce, page = 1, current = [], loadmore }) {
 async function joinBattle() {
     const nonce = Better_Messages.nonce;
     if (!nonce) {
-        console.log('<Logger>', `🔴 [Luận Võ] - Không tìm thấy nonce join_battle_new`);
+        showNotificationUI( `🔴 [Luận Võ] - Không tìm thấy nonce join_battle_new`);
         return false;
     };
     const result = await postRequest(ACTION_URL, {
@@ -772,14 +812,14 @@ async function joinBattle() {
     const message = result.success
         ? `✅ [Luận Võ] - Tham gia thành công.`
         : `❌ [Luận Võ] - Tham gia thất bại.`
-    console.log(message);
+        showNotificationUI(message);
     return !!result.success;
 }
 
 async function toggleAutoAccept(isOn) {
     const nonce = Better_Messages.nonce;
     if (!nonce) {
-        return console.log('<Logger>', `🔴 [Luận Võ] - Không tìm thấy nonce toggle_auto_accept`);
+        return showNotificationUI( `🔴 [Luận Võ] - Không tìm thấy nonce toggle_auto_accept`);
     };
     const result = await postRequest(ACTION_URL, {
         headers: {
@@ -791,12 +831,12 @@ async function toggleAutoAccept(isOn) {
     const message = result.success
         ? `✅ [Luận Võ] - ${isOn ? 'Bật' : 'Tắt'} tự động khiêu chiến thành công.`
         : `❌ [Luận Võ] - ${isOn ? 'Bật' : 'Tắt'} tự động khiêu chiến thất bại.`;
-    console.log(message);
+    showNotificationUI(message);
 }
 
 async function receiveReward(nonce) {
     if (!nonce) {
-        return console.log('<Logger>', `🔴 [Luận Võ] - Không tìm thấy nonce receive_reward`);
+        return showNotificationUI( `🔴 [Luận Võ] - Không tìm thấy nonce receive_reward`);
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -808,7 +848,7 @@ async function receiveReward(nonce) {
     const message = result.success
         ? `✅ [Luận Võ] - Nhận thưởng thành công - ${result.data?.message}`
         : `❌ [Luận Võ] - Nhận thưởng thất bại - ${result.data?.message}`;
-    console.log(message);
+    showNotificationUI(message);
 }
 
 async function getReceivedChallenges() {
@@ -817,7 +857,7 @@ async function getReceivedChallenges() {
     const match = script?.match(/\{[\s\S]*\}/);
     const data = match ? JSON.parse(match[0].replace(/\\\//g, '/')) : {};
     if (!data.nonce) {
-        console.log('<Logger>', `🔴 [Luận Võ] - Không tìm thấy nonce get_received_challenges`);
+        showNotificationUI('<>', `🔴 [Luận Võ] - Không tìm thấy nonce get_received_challenges`);
         return [];
     };
     const result = await postRequest(HH3D_AJAX_URL, {
@@ -842,7 +882,7 @@ async function getReceivedChallenges() {
 
 async function handleRejectReceivedChallenge(challenge, nonce) {
     if (!nonce) {
-        return console.log('<Logger>', `🔴 [Luận Võ] - Không tìm thấy nonce handle_reject_received_challenge`);
+        return showNotificationUI('<>', `🔴 [Luận Võ] - Không tìm thấy nonce handle_reject_received_challenge`);
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -856,12 +896,12 @@ async function handleRejectReceivedChallenge(challenge, nonce) {
     const message = result.success
         ? `✅ [Luận Võ] - Từ chối thành công yêu cầu của ${challenge.name} (${challenge.target_user_id})`
         : `❌ [Luận Võ] -Từ chối thất bại yêu cầu của ${challenge.name} (${challenge.target_user_id})`;
-    console.log(message);
+    showNotificationUI(message);
 }
 
 async function sendChallenge(user, nonce) {
     if (!nonce) {
-        console.log('<Logger>', `🔴 [Luận Võ] - Không tìm thấy nonce send_challenge`);
+        showNotificationUI('<>', `🔴 [Luận Võ] - Không tìm thấy nonce send_challenge`);
         return null;
     };
     const result = await postRequest(HH3D_AJAX_URL, {
@@ -873,16 +913,16 @@ async function sendChallenge(user, nonce) {
         })
     });
     if (result.success && result.data) {
-        console.log(`⚔️ [Luận Võ] Đã gửi khiêu chiến đến ${user.rank} (${user.id})`)
+        showNotificationUI(`⚔️ [Luận Võ] Đã gửi khiêu chiến đến ${user.rank} (${user.id})`)
     } else {
-        console.log(`❌ [Luận Võ] Gửi khiêu chiến không thành công đến ${user.rank} (${user.id})`)
+        showNotificationUI(`❌ [Luận Võ] Gửi khiêu chiến không thành công đến ${user.rank} (${user.id})`)
     }
     return result.data;
 }
 
 async function autoHandleApproveChallenge(challenge, nonce) {
     if (!nonce) {
-        console.log('<Logger>', `🔴 [Luận Võ] - Không tìm thấy nonce auto_handle_approve_challenge`);
+        showNotificationUI('<>', `🔴 [Luận Võ] - Không tìm thấy nonce auto_handle_approve_challenge`);
         return null;
     };
     const result = await postRequest(HH3D_AJAX_URL, {
@@ -898,9 +938,9 @@ async function autoHandleApproveChallenge(challenge, nonce) {
         return result.data;
     }
     if (result.success && result.data) {
-        console.log(`✅ [Luận Võ] Hoàn thành khiêu chiến.`)
+        showNotificationUI(`✅ [Luận Võ] Hoàn thành khiêu chiến.`)
     } else {
-        console.log(`❌ [Luận Võ] Không hoàn thành được khiêu chiến.`)
+        showNotificationUI(`❌ [Luận Võ] Không hoàn thành được khiêu chiến.`)
     }
     return result.data;
 }
@@ -936,7 +976,7 @@ async function autoBattle(isOn = true) {
         if (rewardBtn && rewardNonce) {
             await receiveReward(rewardNonce);
         } else {
-            console.log('<Logger>', `🟢 [Luận Võ] - Đã nhận thưởng.`);
+            showNotificationUI(`🟢 [Luận Võ] - Đã nhận thưởng.`);
         }
         return false;
     }
@@ -948,7 +988,7 @@ async function autoBattle(isOn = true) {
     if (isAutoOn !== isOn) {
         await toggleAutoAccept(isOn);
     } else {
-        console.log('<Logger>', `🟢 [Luận Võ] - Đang ${isOn ? 'bật' : 'tắt'} tự động khiêu chiến.`);
+        showNotificationUI( `🟢 [Luận Võ] - Đang ${isOn ? 'bật' : 'tắt'} tự động khiêu chiến.`);
     }
     return true;
 }
@@ -982,7 +1022,7 @@ async function runBattle({ following = true, online = false, retry = 3, page = n
                 validUsers.shift();
                 continue;
             } else {
-                console.log('<Logger>', `🟡 [Luận Võ] - Đã gửi tối đa - ${sentData}`);
+                showNotificationUI( `🟡 [Luận Võ] - Đã gửi tối đa - ${sentData}`);
                 return;
             }
         }
@@ -1002,14 +1042,14 @@ async function runBattle({ following = true, online = false, retry = 3, page = n
     if (online && retry > 0) {
         return runBattle({ following: false, online, retry: retry - 1, page });
     }
-    console.log('<Logger>', `🟡 [Luận Võ] - Chưa hoàn thành gửi khiêu chiến.`);
+    showNotificationUI( `🟡 [Luận Võ] - Chưa hoàn thành gửi khiêu chiến.`);
 }
 
 // Tiên Duyên
 async function showAllWedding() {
     const nonce = Better_Messages.nonce;
     if (!nonce) {
-        return console.log('<Logger>', `🔴 [Tiên Duyên] - Không tìm thấy nonce show_all_wedding`);
+        return showNotificationUI( `🔴 [Tiên Duyên] - Không tìm thấy nonce show_all_wedding`);
     };
     const result = await postRequest(ACTION_URL, {
         headers: {
@@ -1027,7 +1067,7 @@ async function receiveLiXi(roomId) {
         .map(script => script.textContent.match(/const\s+rest_nonce\s*=\s*['"]([^'"]+)['"]/))
         .find(match => match)?.[1];
     if (!restNonce) {
-        return console.log('<Logger>', `🔴 [Tiên Duyên] - Không tìm thấy nonce hh3d_receive_li_xi`);
+        return showNotificationUI( `🔴 [Tiên Duyên] - Không tìm thấy nonce hh3d_receive_li_xi`);
     };
     const hasLiXiModal = page.doc.getElementById('liXiModal') !== null;
     if (!hasLiXiModal) return;
@@ -1044,25 +1084,25 @@ async function receiveLiXi(roomId) {
     const message = result.success
         ? `✅ [Tiên Duyên] - Mở Lì Xì thành công phòng ${roomId} - Nhận ${result.data?.amount} ${result.data?.name}`
         : `❌ [Tiên Duyên] - Mở Lì Xì thất bại - ${result.data?.message}`;
-    console.log(message);
+    showNotificationUI(message);
 }
 
 async function receiveAllLiXi() {
     const rooms = await showAllWedding();
     for (const room of rooms) {
         if (room.has_blessed !== true) {
-            console.log(`⚠️ [Tiên Duyên] - Chưa chúc phúc phòng ${room.wedding_room_id}`);
+            showNotificationUI(`⚠️ [Tiên Duyên] - Chưa chúc phúc phòng ${room.wedding_room_id}`);
         } else if (room.has_sent_li_xi === true) {
             await receiveLiXi(room.wedding_room_id);
             await new Promise(resolve => setTimeout(resolve, 250));
         } else {
-            console.log(`❌ [Tiên Duyên] - Phòng ${room.wedding_room_id} chưa phát Lì Xì.`);
+            showNotificationUI(`❌ [Tiên Duyên] - Phòng ${room.wedding_room_id} chưa phát Lì Xì.`);
         }
     }
     if (rooms.length) {
-        console.log('<Logger>', `🟢 [Tiên Duyên] - Đã nhận hết Lì Xì.`);
+        showNotificationUI( `🟢 [Tiên Duyên] - Đã nhận hết Lì Xì.`);
     } else {
-        console.log('<Logger>', `🟡 [Tiên Duyên] - Không có phòng cưới nào.`);
+        showNotificationUI( `🟡 [Tiên Duyên] - Không có phòng cưới nào.`);
     }
 }
 
@@ -1071,7 +1111,7 @@ async function redeemCode(code) {
     const page = await loadPage(DOMAIN + '/linh-thach');
     const nonce = page.html.match(/'nonce'\s*:\s*'([a-f0-9]+)'/i)?.[1];
     if (!nonce) {
-        return console.log('<Logger>', `🔴 [Linh Thạch] - Không tìm thấy nonce redeem_linh_thach`);
+        return showNotificationUI( `🔴 [Linh Thạch] - Không tìm thấy nonce redeem_linh_thach`);
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -1083,7 +1123,7 @@ async function redeemCode(code) {
         })
     });
     const message = result.success = `${result.success ? '✅' : '⚠️'} [Linh Thạch] - ${code} - ${result.data?.message}`;
-    console.log(message);
+    showNotificationUI(message);
 }
 
 async function redeemCodes(codes) {
@@ -1091,14 +1131,14 @@ async function redeemCodes(codes) {
         await redeemCode(code);
         await new Promise(resolve => setTimeout(resolve, 250));
     }
-    console.log('<Logger>', `🟢 [Linh Thạch] - Đã nhập xong.`);
+    showNotificationUI( `🟢 [Linh Thạch] - Đã nhập xong.`);
 }
 
 // Đổ Thạch
 async function giveNewbieGift(requestData) {
     const security = requestData.find(value => value.action === 'give_newbie_gift')?.security;
     if (!security) {
-        return console.log('<Logger>', `🔴 [Đổ Thạch] - Không tìm thấy security give_newbie_gift`);
+        return showNotificationUI( `🔴 [Đổ Thạch] - Không tìm thấy security give_newbie_gift`);
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -1110,13 +1150,13 @@ async function giveNewbieGift(requestData) {
     const message = result.success
         ? `🟢 [Đổ Thạch] - Nhận quà tân thủ thành công - ${result.data}`
         : `🔴 [Đổ Thạch] - Nhận quà tân thủ thất bại - ${result.data}`;
-    console.log('<Logger>', message);
+    showNotificationUI( message);
 }
 
 async function claimDoThachReward(requestData) {
     const security = requestData.find(value => value.action === 'claim_do_thach_reward')?.security;
     if (!security) {
-        return console.log('<Logger>', `🔴 [Đổ Thạch] - Không tìm thấy security claim_do_thach_reward`);
+        return showNotificationUI( `🔴 [Đổ Thạch] - Không tìm thấy security claim_do_thach_reward`);
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -1128,13 +1168,13 @@ async function claimDoThachReward(requestData) {
     const message = result.success
         ? `🟢 [Đổ Thạch] - Nhận thưởng thành công - ${result.data?.message}`
         : `🔴 [Đổ Thạch] - ${result.data?.message}`;
-    console.log('<Logger>', message);
+    showNotificationUI( message);
 }
 
 async function loadDoThachData(requestData) {
     const security = requestData.find(value => value.action === 'load_do_thach_data')?.security;
     if (!security) {
-        return console.log('<Logger>', `🔴 [Đổ Thạch] - Không tìm thấy security load_do_thach_data`);
+        return showNotificationUI( `🔴 [Đổ Thạch] - Không tìm thấy security load_do_thach_data`);
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -1146,17 +1186,17 @@ async function loadDoThachData(requestData) {
     const { success, data } = result || {};
     const { stones, is_reward_time, winning_stone_id } = data || {};
     if (!success || !stones) {
-        console.log('<Logger>', `🔴 [Đổ Thạch] - Không lấy được dữ liệu load_do_thach_data`);
+        showNotificationUI( `🔴 [Đổ Thạch] - Không lấy được dữ liệu load_do_thach_data`);
         return [];
     };
     if (!is_reward_time) return stones;
     const rewardStone = stones.find(stone => stone.id == winning_stone_id && stone.bet_placed === true);
     if (!rewardStone) {
-        console.log('<Logger>', `🟡 [Đổ Thạch] - Không có thưởng!`);
+        showNotificationUI( `🟡 [Đổ Thạch] - Không có thưởng!`);
         return [];
     };
     if (rewardStone.reward_claimed === true) {
-        console.log('<Logger>', `🟢 [Đổ Thạch] - Đã nhận thưởng.`);
+        showNotificationUI( `🟢 [Đổ Thạch] - Đã nhận thưởng.`);
         return [];
     };
     await claimDoThachReward(requestData);
@@ -1166,7 +1206,7 @@ async function loadDoThachData(requestData) {
 async function placeDoThachBet(requestData, stone, amount = 20) {
     const security = requestData.find(value => value.action === 'place_do_thach_bet')?.security;
     if (!security) {
-        return console.log('<Logger>', `🔴 [Đổ Thạch] - Không tìm thấy security place_do_thach_bet`);
+        return showNotificationUI( `🔴 [Đổ Thạch] - Không tìm thấy security place_do_thach_bet`);
     };
     const result = await postRequest(HH3D_AJAX_URL, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -1180,7 +1220,7 @@ async function placeDoThachBet(requestData, stone, amount = 20) {
     const message = result.success
         ? `🟢 [Đổ Thạch] - Đặt cược thành công - ${stone.name} (x${stone.reward_multiplier}) - ${amount} Tiên Ngọc`
         : `🔴 [Đổ Thạch] - Đặt cược thất bại - ${result.data}`;
-    console.log('<Logger>', message);
+    showNotificationUI( message);
 }
 
 async function autoDoThach(indices, amount = 2) {
@@ -1204,7 +1244,7 @@ async function autoDoThach(indices, amount = 2) {
             await placeDoThachBet(requestData, stone, amount);
             await new Promise(resolve => setTimeout(resolve, 250));
         } else {
-            console.log(`[Đổ Thạch] - Đã dặt cược vào ${stone.name} (x${stone.reward_multiplier})`);
+            showNotificationUI(`[Đổ Thạch] - Đã dặt cược vào ${stone.name} (x${stone.reward_multiplier})`);
         };
     };
 }
@@ -1271,5 +1311,5 @@ const codes = ['CAOLOITIENDUYEN', 'TIENDUYEN', 'HAPTHULINHTHACH'];
     await autoBattle(battleAutoOn);
     await claimDailyActivityReward();
     await redeemCodes(codes);
-    console.log(`❤️♥️❤️♥️❤️♥️❤️♥️❤️♥️❤️`);
+    showNotificationUI(`❤️♥️❤️♥️❤️♥️❤️♥️❤️♥️❤️`);
 })();
