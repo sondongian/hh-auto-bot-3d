@@ -174,12 +174,12 @@ async function checkIn() {
         });
         const result = await response.json();
         if (result.success) {
-            console.log('<Logger>', '🟢 [Điểm Danh] - Thành công');
+            showNotificationUI('<Logger>', '🟢 [Điểm Danh] - Thành công');
         } else {
-            console.log('<Logger>', '🟡 [Điểm Danh] - ', result.message ?? result);
+            showNotificationUI('<Logger>', '🟡 [Điểm Danh] - ', result.message ?? result);
         }
     } catch (error) {
-        console.log('<Logger>', '🔴 [Điểm Danh] - ', error.message ?? error);
+        showNotificationUI('<Logger>', '🔴 [Điểm Danh] - ', error.message ?? error);
     }
 }
 
@@ -211,12 +211,12 @@ async function attackBoss() {
         });
         const result = await response.json();
         if (result.success) {
-            console.log('<Logger>', '🟢 [Hoang Vực] - Tấn công thành công');
+            showNotificationUI('<Logger>', '🟢 [Hoang Vực] - Tấn công thành công');
         } else {
-            console.log('<Logger>', '🟡 [Hoang Vực] - ', result.data?.error ?? result);
+            showNotificationUI('<Logger>', '🟡 [Hoang Vực] - ', result.data?.error ?? result);
         }
     } catch (error) {
-        console.log('<Logger>', '🔴 [Hoang Vực] - ', error.message ?? error);
+        showNotificationUI('<Logger>', '🔴 [Hoang Vực] - ', error.message ?? error);
     }
 }
 
@@ -234,19 +234,19 @@ async function claimBossChest(nonce) {
         if (response.error) {
             throw Error(response.error);
         } else {
-            console.log('<Logger>', '🟢 [Hoang Vực] - Nhận thưởng thành công');
+            showNotificationUI('<Logger>', '🟢 [Hoang Vực] - Nhận thưởng thành công');
             if (response.total_rewards && response.total_rewards.tu_vi) {
-                console.log('<Logger>', '⚡️ [Hoang Vực] - Tu Vi: ', response.total_rewards.tu_vi);
+                showNotificationUI('<Logger>', '⚡️ [Hoang Vực] - Tu Vi: ', response.total_rewards.tu_vi);
             }
             if (response.total_rewards && response.total_rewards.tinh_thach) {
-                console.log('<Logger>', '💎 [Hoang Vực] - Tu Vi: ', response.total_rewards.tinh_thach);
+                showNotificationUI('<Logger>', '💎 [Hoang Vực] - Tu Vi: ', response.total_rewards.tinh_thach);
             }
             if (response.total_rewards && response.total_rewards.tinh_huyet) {
-                console.log('<Logger>', '🩸 [Hoang Vực] - Tu Vi: ', response.total_rewards.tinh_huyet);
+                showNotificationUI('<Logger>', '🩸 [Hoang Vực] - Tu Vi: ', response.total_rewards.tinh_huyet);
             }
         }
     } catch (error) {
-        console.log('<Logger>', '🔴 [Hoang Vực] - ', error.message ?? error);
+        showNotificationUI('<Logger>', '🔴 [Hoang Vực] - ', error.message ?? error);
     }
 }
 
@@ -266,9 +266,9 @@ async function getNextTimePL(security) {
         const time = result?.data?.time;
         if (result.success && !isNaN(level)) {
             if (level === 4) {
-                console.log('<Logger>', '🟢 [Phúc Lợi Đường] - Đã mở đủ 4 rương');
+                showNotificationUI('<Logger>', '🟢 [Phúc Lợi Đường] - Đã mở đủ 4 rương');
             } else if (time !== '00:00') {
-                console.log('<Logger>', '🟡 [Phúc Lợi Đường] - Chưa đến thời gian mở - ', time);
+                showNotificationUI('<Logger>', '🟡 [Phúc Lợi Đường] - Chưa đến thời gian mở - ', time);
             } else {
                 return level + 1;
             }
@@ -276,7 +276,7 @@ async function getNextTimePL(security) {
             throw Error('Không lấy được dữ liệu');
         }
     } catch (error) {
-        console.log('<Logger>', '🔴 [Phúc Lợi Đường] - ', error.message ?? error);
+        showNotificationUI('<Logger>', '🔴 [Phúc Lợi Đường] - ', error.message ?? error);
     }
     return null;
 }
@@ -299,12 +299,12 @@ async function openChestPL() {
         });
         const result = await response.json();
         if (result.success) {
-            console.log('<Logger>', '🟢 [Phúc Lợi Đường] - Rương ', next, ' - ', result?.data?.message ?? result);
+            showNotificationUI('<Logger>', '🟢 [Phúc Lợi Đường] - Rương ', next, ' - ', result?.data?.message ?? result);
         } else {
-            console.log('<Logger>', '🟡 [Phúc Lợi Đường] - ', result);
+            showNotificationUI('<Logger>', '🟡 [Phúc Lợi Đường] - ', result);
         }
     } catch (error) {
-        console.log('<Logger>', '🔴 [Phúc Lợi Đường] - ', error.message ?? error);
+        showNotificationUI('<Logger>', '🔴 [Phúc Lợi Đường] - ', error.message ?? error);
     }
 }
 
@@ -323,7 +323,7 @@ async function getRemainingTimeTLTM(security) {
         const time = result?.data?.time_remaining;
         if (result.success) {
             if (time !== '00:00') {
-                console.log('<Logger>', '🟡 [Thí Luyện Tông Môn] - Chưa đến thời gian mở - ', time);
+                showNotificationUI('<Logger>', '🟡 [Thí Luyện Tông Môn] - Chưa đến thời gian mở - ', time);
             } else {
                 return time;
             }
@@ -331,7 +331,7 @@ async function getRemainingTimeTLTM(security) {
             throw Error('Không lấy được dữ liệu');
         }
     } catch (error) {
-        console.log('<Logger>', '🔴 [Thí Luyện Tông Môn] - ', error.message ?? error);
+        showNotificationUI('<Logger>', '🔴 [Thí Luyện Tông Môn] - ', error.message ?? error);
     }
     return null;
 }
@@ -353,12 +353,12 @@ async function openChestTLTM() {
         });
         const result = await response.json();
         if (result.success) {
-            console.log('<Logger>', '🟢 [Thí Luyện Tông Môn] - Mở thành công - ', result.data?.message ?? result);
+            showNotificationUI('<Logger>', '🟢 [Thí Luyện Tông Môn] - Mở thành công - ', result.data?.message ?? result);
         } else {
-            console.log('<Logger>', '🟡 [Thí Luyện Tông Môn] - ', result.data?.message ?? result);
+            showNotificationUI('<Logger>', '🟡 [Thí Luyện Tông Môn] - ', result.data?.message ?? result);
         }
     } catch (error) {
-        console.log('<Logger>', '🔴 [Thí Luyện Tông Môn] - ', error.message ?? error);
+        showNotificationUI('<Logger>', '🔴 [Thí Luyện Tông Môn] - ', error.message ?? error);
     }
 }
 
@@ -381,36 +381,36 @@ async function runQuiz() {
             throw Error('Không lấy được dữ liệu');
         }
         if (result.data.completed) {
-            console.log('<Logger>', '🟡 [Vấn Đáp] - Đã hoàn thành');
+            showNotificationUI('<Logger>', '🟡 [Vấn Đáp] - Đã hoàn thành');
             return;
         }
         const questions = result.data.questions;
         for (const [index, value] of questions.entries()) {
             const correct = parseInt(value.is_correct) ?? 0;
             if (correct === 1) {
-                console.log('✅ [Vấn Đáp] - Câu ', index + 1);
+                showNotificationUI('✅ [Vấn Đáp] - Câu ', index + 1);
             } else if (correct === 2) {
-                console.log('❌ [Vấn Đáp] - Câu ', index + 1);
+                showNotificationUI('❌ [Vấn Đáp] - Câu ', index + 1);
             } else {
                 const question = value.question.replace(/\s/g, '').toLowerCase();
                 const answer = bank[question] ?? '';
                 let answerIndex = value.options.findIndex(option => option.replace(/\s/g, '').toLowerCase() === answer);
                 if (answerIndex === -1) {
-                    console.log('🟡 [Vấn Đáp] - Không khớp đáp án câu ', index + 1, '. Lựa chọn đáp án đầu tiên');
+                    showNotificationUI('🟡 [Vấn Đáp] - Không khớp đáp án câu ', index + 1, '. Lựa chọn đáp án đầu tiên');
                     answerIndex = 0;
                 }
                 const saveResult = await saveQuizResult(value.id, answerIndex);
                 const saveCorrect = parseInt(saveResult?.data?.is_correct) ?? 0;
                 if (saveCorrect === 1) {
-                    console.log('✅ [Vấn Đáp] - Câu ', index + 1);
+                    showNotificationUI('✅ [Vấn Đáp] - Câu ', index + 1);
                 } else {
-                    console.log('❌ [Vấn Đáp] - Câu ', index + 1);
+                    showNotificationUI('❌ [Vấn Đáp] - Câu ', index + 1);
                 }
             }
         };
-        console.log('<Logger>', '🟢 [Vấn Đáp] - Đã hoàn thành');
+        showNotificationUI('<Logger>', '🟢 [Vấn Đáp] - Đã hoàn thành');
     } catch (error) {
-        console.log('<Logger>', '🔴 [Vấn Đáp] - ', error.message ?? error);
+        showNotificationUI('<Logger>', '🔴 [Vấn Đáp] - ', error.message ?? error);
     }
 }
 
@@ -427,7 +427,7 @@ async function saveQuizResult(question_id, answer) {
         });
         return response.json();
     } catch (error) {
-        console.log('<Logger>', '🔴 [Vấn Đáp] - ', error.message ?? error);
+        showNotificationUI('<Logger>', '🔴 [Vấn Đáp] - ', error.message ?? error);
     }
 }
 
@@ -448,12 +448,12 @@ async function teLeTongMon() {
         });
         const result = await response.json();
         if (result.success) {
-            console.log('<Logger>', '🟢 [Tế Lễ] - Thành công');
+            showNotificationUI('<Logger>', '🟢 [Tế Lễ] - Thành công');
         } else {
-            console.log('<Logger>', '🟡 [Tế Lễ] - ', result.data ?? result);
+            showNotificationUI('<Logger>', '🟡 [Tế Lễ] - ', result.data ?? result);
         }
     } catch (error) {
-        console.log('<Logger>', '🔴 [Tế Lễ] - ', error.message ?? error);
+        showNotificationUI('<Logger>', '🔴 [Tế Lễ] - ', error.message ?? error);
     }
 }
 
@@ -471,10 +471,10 @@ async function claimDailyActivityReward() {
             });
             const result = await response.json();
             if (result.success) {
-                console.log('✅ [Hoạt Động Hằng Ngày] - Nhận thành công - ', stage);
+                showNotificationUI('✅ [Hoạt Động Hằng Ngày] - Nhận thành công - ', stage);
                 return true;
             } else {
-                console.log('❌ [Hoạt Động Hằng Ngày] - Nhận thất bại - ', result.data?.message ?? result);
+                showNotificationUI('❌ [Hoạt Động Hằng Ngày] - Nhận thất bại - ', result.data?.message ?? result);
                 return false;
             }
         };
@@ -493,9 +493,9 @@ async function claimDailyActivityReward() {
                 count += 1;
             }
         }
-        console.log('<Logger>', '🟢 [Hoạt Động Hằng Ngày] - Đã nhận ', count);
+        showNotificationUI('<Logger>', '🟢 [Hoạt Động Hằng Ngày] - Đã nhận ', count);
     } catch (error) {
-        console.log('<Logger>', '🔴 [Hoạt Động Hằng Ngày] - ', error.message ?? error);
+        showNotificationUI('<Logger>', '🔴 [Hoạt Động Hằng Ngày] - ', error.message ?? error);
     }
 }
 
