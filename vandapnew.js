@@ -1,12 +1,9 @@
-// vandapnew.js
 (async function runQuiz () {
   const DOMAIN          = 'https://hoathinh3d.cam';
   const HH3D_AJAX_URL   = DOMAIN + '/wp-content/themes/halimmovies-child/hh3d-ajax.php';
   const todayStr        = new Date().toISOString().slice(0, 10);
 
-  /* -------------------------------------------------- *
-   * 1.  POST tiện ích                                   *
-   * -------------------------------------------------- */
+
   async function postRequest (url, bodyObj = {}) {
     try {
       const res = await fetch(url, {
@@ -21,9 +18,6 @@
     }
   }
 
-  /* -------------------------------------------------- *
-   * 2.  Notification UI (fade in / out)                 *
-   * -------------------------------------------------- */
   function showNotificationUI (msg, type = 'success') {
     let wrap = document.querySelector('.quiz-notification-container');
     if (!wrap) {
@@ -150,7 +144,7 @@
     'ℱ': 'F', 'ℳ': 'M',
 }
     
-   /* ----------- 4. Chuẩn‑hoá & So khớp ----------- */
+
   function normalize(str) {
     return str.toLowerCase()
       .split('').map(ch => latinMap[ch] || ch).join('')
@@ -339,9 +333,6 @@
 const normalizedBank = {};
 for (const q in quizBank) normalizedBank[normalize(q)] = quizBank[q];
 
-/* -------------------------------------------------- *
- * 5.  Tải dữ liệu duy nhất 1 lần                      *
- * -------------------------------------------------- */
 const loadData = () => postRequest(HH3D_AJAX_URL, { action: 'load_quiz_data' });
 const data     = await loadData();
 
@@ -350,9 +341,6 @@ if (!data.success || !data.data?.questions) {
   return;
 }
 
-/* -------------------------------------------------- *
- * 6.  Kiểm tra & tự động trả lời                      *
- * -------------------------------------------------- */
 const questions = data.data.questions;
 
 // Lấy tất cả câu chưa đúng (0 hoặc 2)
@@ -381,10 +369,10 @@ for (let idx = 0; idx < pending.length; idx++) {
   q.is_correct  = isRight ? '1' : '2';                        // ⚡ cập‑nhật local
   const icon    = isRight ? '✅' : '❌';
   showNotificationUI(
-    `${icon} <b>Căng Cọt Câu ${idx + 1}</b><br>📌 ${q.question}<br>📥Đáp án nè vãn lòn chưa: <i>${opts[pick]}</i><br>🎯Lịt pẹ ${res?.data?.message || ''}`,
+    `${icon} <b>Căng Cọt Câu ${idx + 1}</b><br>📌 ${q.question}<br>📥Đáp án nè vãi lòn chưa: <i>${opts[pick]}</i><br>🎯Lịt pẹ ${res?.data?.message || ''}`,
     isRight ? 'success' : 'error'
   );
-  await new Promise(r => setTimeout(r, 500));                 // nhỏ delay
+  await new Promise(r => setTimeout(r, 250));                 // nhỏ delay
 }
 
 /* -------------------------------------------------- *
