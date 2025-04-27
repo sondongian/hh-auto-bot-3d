@@ -1,3 +1,4 @@
+// @charset "UTF-8";
 const DOMAIN = 'https://hoathinh3d.cam';
 const ACTION_URL = DOMAIN + '/wp-json/hh3d/v1/action';
 const HH3D_AJAX_URL = DOMAIN + '/wp-content/themes/halimmovies-child/hh3d-ajax.php'
