@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>🔥 Kích hoạt Loader</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background: #0e0e0e;
+      color: white;
+    }
+    button {
+      font-size: 18px;
+      padding: 15px 30px;
+      background-color: #1fb141;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #168d33;
+    }
+  </style>
+</head>
+<body>
+  <h1>✨ Kích hoạt Loader ✨</h1>
+  <p>Bấm nút bên dưới để chạy loader trên trang hiện tại:</p>
+  <button onclick="runLoader()">Chạy Loader</button>
+
+  <script>
+    function runLoader() {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/vdap.js?t=' + Date.now();
+      document.body.appendChild(script);
+    }
+  </script>
+</body>
+</html>
