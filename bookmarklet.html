@@ -108,9 +108,13 @@
   <button class="copy-button" onclick="copyScript('kochucphuc')">📋 Lấy Script Auto HĐ ⛔</button>
 
   <!-- Textarea for manual copy (optional) -->
-  <h3>📱 Copy thủ công nếu bạn dùng điện thoại:</h3>
+  <h3>📱 🤦 Thuý An Script: Copy thủ công nếu bạn dùng điện thoại:</h3>
   <textarea class="script-box" readonly onclick="this.select()">javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/thian.js?t='+Date.now();document.body.appendChild(s);})();</textarea>
-
+  <h3>📱 🔁Full HĐ Share: Copy thủ công nếu bạn dùng điện thoại:</h3>
+  <textarea class="script-box" readonly onclick="this.select()">javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhdshare.js?t='+Date.now();document.body.appendChild(s);})();</textarea>
+  <h3>📱 🔁Auto HĐ ⛔ Chúc Phúc: Copy thủ công nếu bạn dùng điện thoại:</h3>
+  <textarea class="script-box" readonly onclick="this.select()">javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js?t='+Date.now();document.body.appendChild(s);})();</textarea>
+  
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
   <button class="toggle-dark" onclick="toggleDarkMode()">🌙 Chuyển Dark Mode</button>
