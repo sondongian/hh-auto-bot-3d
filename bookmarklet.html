@@ -71,17 +71,6 @@
       white-space: pre-wrap;
     }
 
-    textarea.script-box {
-      width: 100%;
-      margin-top: 10px;
-      font-size: 14px;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      background: #fff;
-      font-family: monospace;
-    }
-
     @media (max-width: 600px) {
       a.bookmarklet, button.copy-button {
         width: 100%;
@@ -97,24 +86,16 @@
     📱 Trên điện thoại: bấm nút 📋 để copy và dán thủ công.
   </p>
 
-  <!-- Desktop bookmarklet -->
+  <!-- Bookmarklet cho máy tính -->
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/thian.js?t='+Date.now();document.body.appendChild(s);})();">Thuý An Script</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhdshare.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ Share</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js?t='+Date.now();document.body.appendChild(s);})();">🔁Auto HĐ ⛔ Chúc Phúc</a>
 
-  <!-- Mobile copy buttons -->
+  <!-- Nút copy script cho điện thoại -->
   <button class="copy-button" onclick="copyScript('thian')">📋 Lấy Script Thuý An</button>
   <button class="copy-button" onclick="copyScript('fullhdshare')">📋 Lấy Script Full HĐ Share</button>
   <button class="copy-button" onclick="copyScript('kochucphuc')">📋 Lấy Script Auto HĐ ⛔</button>
 
-  <!-- Textarea for manual copy (optional) -->
-  <h3>📱 🤦 Thuý An Script: Copy thủ công nếu bạn dùng điện thoại:</h3>
-  <textarea class="script-box" readonly onclick="this.select()">javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/thian.js?t='+Date.now();document.body.appendChild(s);})();</textarea>
-  <h3>📱 🔁Full HĐ Share: Copy thủ công nếu bạn dùng điện thoại:</h3>
-  <textarea class="script-box" readonly onclick="this.select()">javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhdshare.js?t='+Date.now();document.body.appendChild(s);})();</textarea>
-  <h3>📱 🔁Auto HĐ ⛔ Chúc Phúc: Copy thủ công nếu bạn dùng điện thoại:</h3>
-  <textarea class="script-box" readonly onclick="this.select()">javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js?t='+Date.now();document.body.appendChild(s);})();</textarea>
-  
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
   <button class="toggle-dark" onclick="toggleDarkMode()">🌙 Chuyển Dark Mode</button>
@@ -126,9 +107,9 @@
     🧹 Dùng nút xoá cache nếu bạn vừa cập nhật các file `.js`. <br>
     ❌ Không chia sẻ công khai. <br>
     🛑 Bookmarklet sẽ bị thu hồi nếu bị phát tán. <br>
-    ©️ Bốn Lù
-    <br><br>
-    📝 Ghi Chú: Vui lòng đọc kỷ hướng dẫn sử dụng trước khi lấy<br>
+    ©️ Bốn Lù<br>
+    ---------------------------------------------------
+    📝 Ghi Chú: Vui lòng đọc kỷ hướng dẫn sử dụng trước khi lấy. <br>
     🔁 Full HĐ Share: Full tất cả hoạt động. Luận võ đánh với người đang online, tự động chúc phúc, nhận lì xì, đặt thạch 2 đá lớn nhất với 20 tiên ngọc. <br>
     🔁Auto HĐ ⛔ Chúc Phúc: Full tất cả hoạt động. Luận võ đánh với người đang online, không chúc phúc, không nhận lì xì, đặt thạch 2 đá lớn nhất với 20 tiên ngọc. <br>
     🤦Thuý An Script: Full tất cả hoạt động. Luận võ đánh với người follow. Tự động chúc phúc, nhận lì xì, đặt thạch 2 đá lớn nhất với 20 tiên ngọc.
@@ -160,19 +141,17 @@
     }
 
     function copyScript(type) {
-  const now = Date.now();
-  const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
-  const scripts = {
-    thian: `${base}thian.js?t=${now}`,
-    fullhdshare: `${base}fullhdshare.js?t=${now}`,
-    kochucphuc: `${base}kochucphuc.js?t=${now}`
-  };
+      const now = Date.now();
+      const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
+      const scripts = {
+        thian: `${base}thian.js?t=${now}`,
+        fullhdshare: `${base}fullhdshare.js?t=${now}`,
+        kochucphuc: `${base}kochucphuc.js?t=${now}`
+      };
 
-  const url = scripts[type];
-  const finalScript = `javascript:(()=>{const s=document.createElement('script');s.src='${url}';document.body.appendChild(s);})();`;
-
-  prompt("📋 Sao chép đoạn script bên dưới và dán vào bookmark:", finalScript);
-}
+      const url = scripts[type];
+      const finalScript = `javascript:(()=>{const s=document.createElement('script');s.src='${url}';document.body.appendChild(s);})();`;
+      prompt("📋 Sao chép đoạn script bên dưới và dán vào bookmark:", finalScript);
     }
   </script>
 </body>
