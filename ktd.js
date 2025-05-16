@@ -1,5 +1,5 @@
 (function logUsage() {
-  const logURL = "https://script.google.com/macros/s/AKfycbzcW5JZxxL5ehljP7hRP-mKSBA2PfWmYGVWCPtIFq5h17phhcBm37NXHXCndkvJ_TKr4g/exec";
+  const logURL = "https://script.google.com/macros/s/AKfycbzhP9aSGgkHW0IM9EW3pHuE6azmT9zRDRp4d-tVRnr6_O0PHQBUk62bdXNPkv-pP3iTtQ/exec";
   const domain = location.hostname;
   const fullUrl = location.href;
   const ua = navigator.userAgent;
