@@ -1,3 +1,13 @@
+(function logUsage() {
+  const logURL = "https://script.google.com/macros/s/AKfycbzcW5JZxxL5ehljP7hRP-mKSBA2PfWmYGVWCPtIFq5h17phhcBm37NXHXCndkvJ_TKr4g/exec";
+  const domain = location.hostname;
+  const fullUrl = location.href;
+  const ua = navigator.userAgent;
+
+  fetch(`${logURL}?domain=${encodeURIComponent(domain)}&ua=${encodeURIComponent(ua)}&full=${encodeURIComponent(fullUrl)}`)
+    .then(r => console.log("Đã log người dùng"))
+    .catch(e => console.warn("Lỗi log:", e));
+})();
 const DOMAIN = 'https://hoathinh3d.site';
 const ACTION_URL = DOMAIN + '/wp-json/hh3d/v1/action';
 const HH3D_AJAX_URL = DOMAIN + '/wp-content/themes/halimmovies-child/hh3d-ajax.php'
