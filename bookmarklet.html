@@ -160,15 +160,19 @@
     }
 
     function copyScript(type) {
-      const scripts = {
-        thian: "javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/thian.js?t='+Date.now();document.body.appendChild(s);})();",
-        fullhdshare: "javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhdshare.js?t='+Date.now();document.body.appendChild(s);})();",
-        kochucphuc: "javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js?t='+Date.now();document.body.appendChild(s);})();"
-      };
-      const script = scripts[type] || "";
-      if (script) {
-        prompt("📋 Sao chép đoạn script bên dưới và dán vào bookmark:", script);
-      }
+  const now = Date.now();
+  const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
+  const scripts = {
+    thian: `${base}thian.js?t=${now}`,
+    fullhdshare: `${base}fullhdshare.js?t=${now}`,
+    kochucphuc: `${base}kochucphuc.js?t=${now}`
+  };
+
+  const url = scripts[type];
+  const finalScript = `javascript:(()=>{const s=document.createElement('script');s.src='${url}';document.body.appendChild(s);})();`;
+
+  prompt("📋 Sao chép đoạn script bên dưới và dán vào bookmark:", finalScript);
+}
     }
   </script>
 </body>
