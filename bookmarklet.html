@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🚀 HH3D - Bookmarklet Auto 🚀</title>
   <style>
     :root {
@@ -21,18 +22,21 @@
 
     body {
       font-family: 'Segoe UI', Roboto, sans-serif;
-      padding: 40px;
+      padding: 20px;
       background: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
-      max-width: 700px;
+      max-width: 800px;
       margin: auto;
       transition: all 0.3s ease;
     }
+
     h1 {
       color: #d63384;
+      font-size: 24px;
     }
-    a.bookmarklet, button.purge-button, button.toggle-dark {
+
+    a.bookmarklet, button.purge-button, button.toggle-dark, button.copy-button {
       display: inline-block;
       padding: 12px 20px;
       background: var(--button-bg);
@@ -46,20 +50,17 @@
       cursor: pointer;
       transition: background 0.3s ease;
     }
-    a.bookmarklet:hover, button.purge-button:hover, button.toggle-dark:hover {
+
+    a.bookmarklet:hover, button.purge-button:hover, button.toggle-dark:hover, button.copy-button:hover {
       background: var(--button-hover);
     }
+
     .note {
       color: #777;
       font-size: 14px;
       margin-top: 20px;
     }
-    code {
-      background: #eee;
-      padding: 2px 4px;
-      border-radius: 4px;
-      font-size: 13px;
-    }
+
     .log {
       margin-top: 20px;
       font-family: monospace;
@@ -69,18 +70,46 @@
       border-left: 4px solid var(--button-bg);
       white-space: pre-wrap;
     }
+
+    textarea.script-box {
+      width: 100%;
+      margin-top: 10px;
+      font-size: 14px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: #fff;
+      font-family: monospace;
+    }
+
+    @media (max-width: 600px) {
+      a.bookmarklet, button.copy-button {
+        width: 100%;
+        margin: 8px 0;
+      }
+    }
   </style>
 </head>
 <body>
   <h1>🚀 HH3D - Bookmarklet 🚀</h1>
   <p>
-    ⬇ Kéo các nút bên dưới lên thanh ➡️ bookmarks ⬆️: <br>
-    ⚠️ Giữ chuột trái 🖱 và kéo lên thanh bookmarks để lưu.
+    ⬇ Trên máy tính: kéo các nút bên dưới lên thanh ➡️ bookmarks. <br>
+    📱 Trên điện thoại: bấm nút 📋 để copy và dán thủ công.
   </p>
-  
+
+  <!-- Desktop bookmarklet -->
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/thian.js?t='+Date.now();document.body.appendChild(s);})();">Thuý An Script</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhdshare.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ Share</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js?t='+Date.now();document.body.appendChild(s);})();">🔁Auto HĐ ⛔ Chúc Phúc</a>
+
+  <!-- Mobile copy buttons -->
+  <button class="copy-button" onclick="copyScript('thian')">📋 Lấy Script Thuý An</button>
+  <button class="copy-button" onclick="copyScript('fullhdshare')">📋 Lấy Script Full HĐ Share</button>
+  <button class="copy-button" onclick="copyScript('kochucphuc')">📋 Lấy Script Auto HĐ ⛔</button>
+
+  <!-- Textarea for manual copy (optional) -->
+  <h3>📱 Copy thủ công nếu bạn dùng điện thoại:</h3>
+  <textarea class="script-box" readonly onclick="this.select()">javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/thian.js?t='+Date.now();document.body.appendChild(s);})();</textarea>
 
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
@@ -90,15 +119,15 @@
 
   <p class="note">
     💡 Các script luôn tải phiên bản mới nhất từ GitHub. <br>
-    🧹 Dùng nút xoá cache nếu bạn vừa cập nhật các file `.min.js`. <br>
+    🧹 Dùng nút xoá cache nếu bạn vừa cập nhật các file `.js`. <br>
     ❌ Không chia sẻ công khai. <br>
     🛑 Bookmarklet sẽ bị thu hồi nếu bị phát tán. <br>
-    ©️ Bốn Lù<br>
-    ---------------------------------<br>
-    📝Ghi Chú - Chú Thích:<br>
-    🔁Full HĐ Share: Full tất cả hoạt động. Luận võ đánh với người đang online, tự động chúc phúc, nhận lì xì, đặt thạch 2 đá lớn nhất với 20 tiên ngọc.<br>
-    🔁Auto HĐ ⛔ Chúc Phúc: Full tất cả hoạt động. Luận võ đánh với người đang online, không chúc phúc, không nhận lì xì, đặt thạch 2 đá lớn nhất với 20 tiên ngọc.<br>
-    🤦Thuý An Script: Full tất cả hoạt động. Luận võ đánh với người follow. Tự động chúc phúc, nhận lì xì, đặt thạch 2 đá lớn nhất với 20 tiên ngọc.<br>
+    ©️ Bốn Lù
+    <br><br>
+    📝 Ghi Chú: <br>
+    🔁 Full HĐ Share: Tự động chạy toàn bộ, bao gồm chúc phúc, lì xì, đặt thạch. <br>
+    ⛔ Auto HĐ Không Chúc Phúc: Không chúc phúc/lì xì. <br>
+    🤦 Thuý An Script: Đánh theo follow, full tính năng.
   </p>
 
   <script>
@@ -106,14 +135,11 @@
       const urls = [
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/thian.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhdshare.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js',
-        
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js'
       ];
-      
       const logEl = document.getElementById('log');
       logEl.hidden = false;
       logEl.textContent = '🔄 Đang gửi yêu cầu xoá cache...';
-
       Promise.all(
         urls.map(url =>
           fetch(url)
@@ -127,6 +153,18 @@
 
     function toggleDarkMode() {
       document.body.classList.toggle('dark');
+    }
+
+    function copyScript(type) {
+      const scripts = {
+        thian: "javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/thian.js?t='+Date.now();document.body.appendChild(s);})();",
+        fullhdshare: "javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhdshare.js?t='+Date.now();document.body.appendChild(s);})();",
+        kochucphuc: "javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js?t='+Date.now();document.body.appendChild(s);})();"
+      };
+      const script = scripts[type] || "";
+      if (script) {
+        prompt("📋 Sao chép đoạn script bên dưới và dán vào bookmark:", script);
+      }
     }
   </script>
 </body>
