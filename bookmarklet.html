@@ -87,11 +87,13 @@
   </p>
 
   <!-- Bookmarklet cho máy tính -->
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ⛔</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhdshare.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ Share</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js?t='+Date.now();document.body.appendChild(s);})();">🔁Auto HĐ ⛔ Chúc Phúc</a>
 
   <!-- Nút copy script cho điện thoại -->
   <br>
+  <button class="copy-button" onclick="copyScript('fullhdshare')">📋 Full HĐ⛔</button>
   <button class="copy-button" onclick="copyScript('fullhdshare')">📋 Lấy Script Full HĐ Share</button>
   <button class="copy-button" onclick="copyScript('kochucphuc')">📋 Lấy Script Auto HĐ ⛔ Chúc Phúc</button>
 
@@ -116,6 +118,7 @@
   <script>
     function purgeCDN() {
       const urls = [
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhdshare.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js'
       ];
@@ -141,6 +144,7 @@
       const now = Date.now();
       const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
       const scripts = {
+        full: `${base}full.js?t=${now}`,
         fullhdshare: `${base}fullhdshare.js?t=${now}`,
         kochucphuc: `${base}kochucphuc.js?t=${now}`
       };
