@@ -87,12 +87,10 @@
   </p>
 
   <!-- Bookmarklet cho máy tính -->
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/thiann.js?t='+Date.now();document.body.appendChild(s);})();">Thuý An Script</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhdshare.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ Share</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js?t='+Date.now();document.body.appendChild(s);})();">🔁Auto HĐ ⛔ Chúc Phúc</a>
 
   <!-- Nút copy script cho điện thoại -->
-  <button class="copy-button" onclick="copyScript('thian')">📋 Lấy Script Thuý An</button>
   <button class="copy-button" onclick="copyScript('fullhdshare')">📋 Lấy Script Full HĐ Share</button>
   <button class="copy-button" onclick="copyScript('kochucphuc')">📋 Lấy Script Auto HĐ ⛔</button>
 
@@ -110,15 +108,13 @@
     ©️ Bốn Lù<br>
     ---------------------------------------------------<br>
     📝 Ghi Chú: Vui lòng đọc kỷ hướng dẫn sử dụng trước khi lấy. <br>
-    🔁Full HĐ Share: Full tất cả hoạt động. Luận võ đánh với người đang online, tự động chúc phúc, nhận lì xì, đặt thạch 2 đá lớn nhất với 20 tiên ngọc. <br>
+    🔁Full HĐ Share: Full tất cả hoạt động. Luận võ đánh với người đang follow, tự động chúc phúc, nhận lì xì, đặt thạch 2 đá lớn nhất với 20 tiên ngọc. <br>
     🔁Auto HĐ ⛔ Chúc Phúc: Full tất cả hoạt động. Luận võ đánh với người đang online, KHÔNG CHÚC PHÚC, KHÔNG NHẬN LÌ XÌ, đặt thạch 2 đá lớn nhất với 20 tiên ngọc. <br>
-    🤦Thuý An Script: Full tất cả hoạt động. Luận võ đánh với người follow. Tự động chúc phúc, nhận lì xì, đặt thạch 2 đá lớn nhất với 20 tiên ngọc.
   </p>
 
   <script>
     function purgeCDN() {
       const urls = [
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/thiann.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhdshare.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js'
       ];
@@ -144,7 +140,6 @@
       const now = Date.now();
       const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
       const scripts = {
-        thian: `${base}thian.js?t=${now}`,
         fullhdshare: `${base}fullhdshare.js?t=${now}`,
         kochucphuc: `${base}kochucphuc.js?t=${now}`
       };
