@@ -56,7 +56,7 @@
     }
 
     .note {
-      color: #777;
+      color: #FFFFFF;
       font-size: 14px;
       margin-top: 20px;
     }
@@ -87,16 +87,14 @@
   </p>
 
   <!-- Bookmarklet cho máy tính -->
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ⛔</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhdshare.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ Share</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js?t='+Date.now();document.body.appendChild(s);})();">🔁Auto HĐ ⛔ Chúc Phúc</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full Hoạt Động</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocp.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ ⛔Tiên Duyên</a>
 
   <!-- Nút copy script cho điện thoại -->
   <br>
-  <button class="copy-button" onclick="copyScript('fullhdshare')">📋 Full HĐ⛔</button>
-  <button class="copy-button" onclick="copyScript('fullhdshare')">📋 Lấy Script Full HĐ Share</button>
-  <button class="copy-button" onclick="copyScript('kochucphuc')">📋 Lấy Script Auto HĐ ⛔ Chúc Phúc</button>
-
+  <button class="copy-button" onclick="copyScript('full')">📋 Full HĐ</button>
+  <button class="copy-button" onclick="copyScript('nocp')">📋 Full HĐ⛔ Tiên Duyên</button>
+  
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
   <button class="toggle-dark" onclick="toggleDarkMode()">🌙 Chuyển Dark Mode</button>
@@ -119,8 +117,7 @@
     function purgeCDN() {
       const urls = [
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fullhdshare.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kochucphuc.js'
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocp.js'
       ];
       const logEl = document.getElementById('log');
       logEl.hidden = false;
@@ -145,8 +142,7 @@
       const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
       const scripts = {
         full: `${base}full.js?t=${now}`,
-        fullhdshare: `${base}fullhdshare.js?t=${now}`,
-        kochucphuc: `${base}kochucphuc.js?t=${now}`
+        nocp: `${base}nocp.js?t=${now}`
       };
 
       const url = scripts[type];
