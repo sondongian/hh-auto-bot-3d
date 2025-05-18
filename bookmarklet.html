@@ -95,6 +95,7 @@
   <p>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này)</p><br>
   <button class="copy-button" onclick="copyScript('full')">📋 Full HĐ</button>
   <button class="copy-button" onclick="copyScript('nocp')">📋 Full HĐ⛔ Tiên Duyên</button>
+  <button class="copy-button" onclick="copyScript('khoangmach')">⛏ Khoáng Mạch</button>
   
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
@@ -109,15 +110,17 @@
     🛑 Bookmarklet sẽ bị thu hồi nếu bị phát tán. <br>
     ©️ Bốn Lù<br>
     ---------------------------------------------------<br>
-    📝 Ghi Chú: Vui lòng đọc kỷ hướng dẫn sử dụng trước khi lấy. <br>
-    🔁Full HĐ Share: Full tất cả hoạt động. Luận võ đánh với người đang follow, tự động chúc phúc, nhận lì xì, đặt thạch 2 đá lớn nhất với 20 tiên ngọc. <br>
-    🔁Auto HĐ ⛔ Chúc Phúc: Full tất cả hoạt động. Luận võ đánh với người đang online, KHÔNG CHÚC PHÚC, KHÔNG NHẬN LÌ XÌ, đặt thạch 2 đá lớn nhất với 20 tiên ngọc. <br>
+    📝 <b>Ghi Chú</b>: Vui lòng đọc kỷ hướng dẫn sử dụng trước khi lấy.</b> <br>
+    🔁<b>Full HĐ Share</b>: Full tất cả hoạt động. Luận võ đánh với người đang follow, tự động chúc phúc, nhận lì xì, đặt thạch 2 đá lớn nhất với 20 tiên ngọc. <br>
+    🔁<b>Auto HĐ ⛔ Chúc Phúc</b>: Full tất cả hoạt động. Luận võ đánh với người đang online, KHÔNG CHÚC PHÚC, KHÔNG NHẬN LÌ XÌ, đặt thạch 2 đá lớn nhất với 20 tiên ngọc. <br>
+    ⛏ <b>Khoáng Mạch: Tuỳ chọn mốc thưởng và cài đặt thời gian tự động nhận thưởng, đặc tính là script nên phải treo tab. Nếu tab bị ẩn hoặc bị đóng, script sẻ không khoạt động.<br>
   </p>
 
   <script>
     function purgeCDN() {
       const urls = [
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/khoangmach.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocp.js'
       ];
       const logEl = document.getElementById('log');
@@ -143,7 +146,8 @@
       const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
       const scripts = {
         full: `${base}full.js?t=${now}`,
-        nocp: `${base}nocp.js?t=${now}`
+        nocp: `${base}nocp.js?t=${now}`,
+        khoangmach: `${base}khoangmach.js?t=${now}`
       };
 
       const url = scripts[type];
