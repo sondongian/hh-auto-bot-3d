@@ -80,7 +80,7 @@
   </style>
 </head>
 <body>
-  <h1>🚀 HH3D - Bookmarklet 🚀</h1>
+  <h1>🚀 Check ID Bookmarklet 🚀</h1>
   <p>
     ⬇ Trên máy tính: kéo các nút bên dưới lên thanh ➡️ bookmarks. <br>
     📱 Trên điện thoại: bấm nút 📋 để copy và dán thủ công.
@@ -88,14 +88,15 @@
 
   <!-- Bookmarklet cho máy tính -->
   <p><b>Bookmarklet cho máy tính ⬇:</b></p>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full Hoạt Động</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocp.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ ⛔Tiên Duyên</a><br>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/accfull.js?t='+Date.now();document.body.appendChild(s);})();">🔁ID Full Hoạt Động</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/accnocp.js?t='+Date.now();document.body.appendChild(s);})();">🔁ID Full HĐ ⛔Tiên Duyên</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/acckhoangmach.js?t='+Date.now();document.body.appendChild(s);})();">🔁ID Khoáng Mạch</a><br>
 
   <!-- Nút copy script cho điện thoại -->
   <p><b>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này) ⬇:</b></p>
-  <button class="copy-button" onclick="copyScript('full')">📋 Full HĐ</button>
-  <button class="copy-button" onclick="copyScript('nocp')">📋 Full HĐ⛔ Tiên Duyên</button>
-  <button class="copy-button" onclick="copyScript('khoangmach')">⛏ Khoáng Mạch</button>
+  <button class="copy-button" onclick="copyScript('accfull')">📋ID Full HĐ</button>
+  <button class="copy-button" onclick="copyScript('accnocp')">📋ID Full HĐ⛔ Tiên Duyên</button>
+  <button class="copy-button" onclick="copyScript('acckhoangmach')">⛏ ID Khoáng Mạch</button>
   
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
@@ -110,7 +111,7 @@
     🛑 Bookmarklet sẽ bị thu hồi nếu bị phát tán. <br>
     ©️ Bốn Lù<br>
     ---------------------------------------------------<br>
-    📝 <b>Ghi Chú</b>: Vui lòng đọc kỷ hướng dẫn sử dụng trước khi lấy.</b> <br>
+    📝<b>Ghi Chú</b>: Vui lòng đọc kỷ hướng dẫn sử dụng trước khi lấy.</b> <br>
     🔁<b>Full HĐ Share</b>: Full tất cả hoạt động. Luận võ đánh với người đang follow, tự động chúc phúc, nhận lì xì, đặt thạch 2 đá lớn nhất với 20 tiên ngọc. <br>
     🔁<b>Auto HĐ ⛔ Chúc Phúc</b>: Full tất cả hoạt động. Luận võ đánh với người đang online, KHÔNG CHÚC PHÚC, KHÔNG NHẬN LÌ XÌ, đặt thạch 2 đá lớn nhất với 20 tiên ngọc. <br>
     ⛏ <b>Khoáng Mạch</b>: Tuỳ chọn mốc thưởng và cài đặt thời gian tự động nhận thưởng, đặc tính là script nên phải treo tab. Nếu tab bị ẩn hoặc bị đóng, script sẻ không khoạt động.<br>
@@ -119,9 +120,9 @@
   <script>
     function purgeCDN() {
       const urls = [
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/khoangmach.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocp.js'
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/accfull.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/acckhoangmach.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/accnocp.js'
       ];
       const logEl = document.getElementById('log');
       logEl.hidden = false;
@@ -145,9 +146,9 @@
       const now = Date.now();
       const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
       const scripts = {
-        full: `${base}full.js?t=${now}`,
-        nocp: `${base}nocp.js?t=${now}`,
-        khoangmach: `${base}khoangmach.js?t=${now}`
+        accfull: `${base}accfull.js?t=${now}`,
+        accnocp: `${base}accnocp.js?t=${now}`,
+        acckhoangmach: `${base}acckhoangmach.js?t=${now}`
       };
 
       const url = scripts[type];
