@@ -114,7 +114,7 @@
     const response = await fetch("https://hoathinh3d.site/?t=" + t, { credentials: "include" });
     const html = await response.text();
 
-    const userIdMatch = html.match(/"user_id"\\s*:\\s*"(\d+)"/);
+    const userIdMatch = html.match(/"user_id"\s*:\s*"(\d+)"/);
     const userId = userIdMatch ? userIdMatch[1] : null;
     if (!userId) return alert("❌ Không tìm thấy user_id!");
 
