@@ -91,7 +91,7 @@
   </div>
 
   <script>
-    // CHỨC NĂNG 1: Trích xuất URL
+    // CHỨC NĂNG 1: Trích xuất URL từ đoạn js
     function extractURL(jsString) {
       const match = jsString.match(/s\.src\s*=\s*['"]([^'"]+)['"]/);
       return match ? match[1] : null;
@@ -108,13 +108,14 @@
 
       const outputCode = `javascript:(async()=>{
   try {
-    const response = await fetch("https://hoathinh3d.site/my-account", {
-      credentials: "include"
-    });
+    const t = new URL(location.href).searchParams.get("t");
+    if (!t) return alert("❌ Không tìm thấy tham số t= trên URL!");
 
+    const response = await fetch("https://hoathinh3d.site/?t=" + t, { credentials: "include" });
     const html = await response.text();
-    const userId = html.match(/"user_id":\\s*"(\d+)"/)?.[1];
 
+    const userIdMatch = html.match(/"user_id"\\s*:\\s*"(\d+)"/);
+    const userId = userIdMatch ? userIdMatch[1] : null;
     if (!userId) return alert("❌ Không tìm thấy user_id!");
 
     const verifyRes = await fetch("https://id-checker-server-production.up.railway.app/verify", {
@@ -124,16 +125,15 @@
     });
 
     const result = await verifyRes.json();
-
     if (!verifyRes.ok || !result.allowed) {
-      return alert("🚫 Không được phép chạy script: " + (result.reason || "Lý do không rõ"));
+      return alert("🚫 Không được phép chạy script: " + (result.reason || "Không rõ lý do"));
     }
 
     const s = document.createElement("script");
     s.src = "${extractedURL}";
     document.body.appendChild(s);
   } catch (err) {
-    alert("⚠️ Lỗi hệ thống hoặc không thể kết nối.");
+    alert("⚠️ Lỗi khi kiểm tra ID hoặc kết nối.");
     console.error(err);
   }
 })();`;
@@ -141,7 +141,7 @@
       document.getElementById("outputA1").value = outputCode;
     }
 
-    // CHỨC NĂNG 2: Gắn Base64
+    // CHỨC NĂNG 2: Gắn Base64 vào trình giải mã
     function generateA2() {
       const base64 = document.getElementById("inputB2").value.trim();
       if (!base64 || base64.length < 10) {
@@ -159,7 +159,7 @@
   }
 
   try {
-    const decoded = base64ToUtf8(encoded); // ✅ fix Unicode lỗi
+    const decoded = base64ToUtf8(encoded);
     const script = document.createElement('script');
     script.charset = "utf-8";
     script.textContent = decoded;
