@@ -93,9 +93,9 @@
 
   <!-- Nút copy script cho điện thoại -->
   <p><b>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này) ⬇:</b></p>
-  <button class="copy-button" onclick="copyScript('full')">📋 Full HĐ</button>
-  <button class="copy-button" onclick="copyScript('nocp')">📋 Full HĐ⛔ Tiên Duyên</button>
-  <button class="copy-button" onclick="copyScript('khoangmach')">⛏ Khoáng Mạch</button>
+  <button class="copy-button" onclick="copyScript('fulls')">📋 Full HĐ</button>
+  <button class="copy-button" onclick="copyScript('kcp')">📋 Full HĐ⛔ Tiên Duyên</button>
+  <button class="copy-button" onclick="copyScript('km')">⛏ Khoáng Mạch</button>
   
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
@@ -119,9 +119,9 @@
   <script>
     function purgeCDN() {
       const urls = [
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/khoangmach.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocp.js'
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fulls.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcp.js'
       ];
       const logEl = document.getElementById('log');
       logEl.hidden = false;
@@ -145,9 +145,9 @@
       const now = Date.now();
       const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
       const scripts = {
-        full: `${base}full.js?t=${now}`,
-        nocp: `${base}nocp.js?t=${now}`,
-        khoangmach: `${base}khoangmach.js?t=${now}`
+        full: `${base}fulls.js?t=${now}`,
+        nocp: `${base}kcp.js?t=${now}`,
+        khoangmach: `${base}km.js?t=${now}`
       };
 
       const url = scripts[type];
