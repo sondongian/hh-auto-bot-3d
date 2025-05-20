@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🚀 HH3D - Bookmarklet Auto 🚀</title>
+  <title>🚀 Script Auto HH3D 🚀</title>
   <style>
     :root {
       --bg-color: #2D3033;
@@ -19,7 +19,6 @@
       --button-hover: #2046aa;
       --log-bg: #2b2d42;
     }
-
     body {
       font-family: 'Segoe UI', Roboto, sans-serif;
       padding: 20px;
@@ -30,12 +29,10 @@
       margin: auto;
       transition: all 0.3s ease;
     }
-
     h1 {
       color: #d63384;
       font-size: 24px;
     }
-
     a.bookmarklet, button.purge-button, button.toggle-dark, button.copy-button {
       display: inline-block;
       padding: 12px 20px;
@@ -50,17 +47,14 @@
       cursor: pointer;
       transition: background 0.3s ease;
     }
-
     a.bookmarklet:hover, button.purge-button:hover, button.toggle-dark:hover, button.copy-button:hover {
       background: var(--button-hover);
     }
-
     .note {
       color: #FFFFFF;
       font-size: 14px;
       margin-top: 20px;
     }
-
     .log {
       margin-top: 20px;
       font-family: monospace;
@@ -70,7 +64,6 @@
       border-left: 4px solid var(--button-bg);
       white-space: pre-wrap;
     }
-
     @media (max-width: 600px) {
       a.bookmarklet, button.copy-button {
         width: 100%;
@@ -86,7 +79,6 @@
     📱 Trên điện thoại: bấm nút 📋 để copy và dán thủ công.
   </p>
 
-  <!-- Nút copy script cho điện thoại -->
   <p><b>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này) ⬇:</b></p>
   <button class="copy-button" onclick="copyScript('accfull')">📋ID Full HĐ</button>
   <button class="copy-button" onclick="copyScript('accnocp')">📋ID Full HĐ⛔ Tiên Duyên</button>
@@ -99,16 +91,16 @@
   <div id="log" class="log" hidden></div>
 
   <p class="note">
-    💡 Các script luôn tải phiên bản mới nhất từ GitHub. <br>
+    💡 Các script luôn tải phiên bản mới nhất từ GitHub bằng tham số `?t=Date.now()`. <br>
     🧹 Dùng nút xoá cache nếu bạn vừa cập nhật các file `.js`. <br>
-    ❌ Không chia sẻ công khai. <br>
-    🛑 Bookmarklet sẽ bị thu hồi nếu bị phát tán. <br>
-    ©️ Bốn Lù<br>
+    🛠 Nếu muốn **ổn định tuyệt đối**, hãy thay `base` bằng link theo commit hash cụ thể. <br><br>
+    ❌ Không chia sẻ công khai. Script có thể bị vô hiệu nếu bị phát tán. <br>
+    ⛔ Bản quyền ©️ Bốn Lù<br>
     ---------------------------------------------------<br>
-    📝<b>Ghi Chú</b>: Vui lòng đọc kỷ hướng dẫn sử dụng trước khi lấy.</b> <br>
-    🔁<b>Full HĐ Share</b>: Full tất cả hoạt động. Luận võ đánh với người đang follow, tự động chúc phúc, nhận lì xì, đặt thạch 2 đá lớn nhất với 20 tiên ngọc. <br>
-    🔁<b>Auto HĐ ⛔ Chúc Phúc</b>: Full tất cả hoạt động. Luận võ đánh với người đang online, KHÔNG CHÚC PHÚC, KHÔNG NHẬN LÌ XÌ, đặt thạch 2 đá lớn nhất với 20 tiên ngọc. <br>
-    ⛏ <b>Khoáng Mạch</b>: Tuỳ chọn mốc thưởng và cài đặt thời gian tự động nhận thưởng, đặc tính là script nên phải treo tab. Nếu tab bị ẩn hoặc bị đóng, script sẻ không khoạt động.<br>
+    📝<b>Ghi Chú</b>: <br>
+    🔁 <b>Full HĐ Share</b>: Luận võ follow, chúc phúc, lì xì, đặt 2 đá to. <br>
+    🔁 <b>Auto HĐ ⛔ Chúc Phúc</b>: KHÔNG CHÚC PHÚC, KHÔNG LÌ XÌ, đặt 2 đá to. <br>
+    ⛏ <b>Khoáng Mạch</b>: Auto nhận mốc theo thời gian. Treo tab để hoạt động. <br>
   </p>
 
   <script>
@@ -138,7 +130,10 @@
 
     function copyScript(type) {
       const now = Date.now();
+
+      // 👉 Nếu muốn ổn định tuyệt đối thì đổi dòng này thành link chứa commit hash
       const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
+
       const scripts = {
         accfull: `${base}accfull.js?t=${now}`,
         accnocp: `${base}accnocp.js?t=${now}`,
