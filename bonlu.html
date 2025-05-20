@@ -82,7 +82,7 @@
   <p><b>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này) ⬇:</b></p>
   <button class="copy-button" onclick="copyScript('accfull')">📋ID Full HĐ</button>
   <button class="copy-button" onclick="copyScript('accnocp')">📋ID Full HĐ⛔ Tiên Duyên</button>
-  <button class="copy-button" onclick="copyScript('acckhoangmach')">⛏ ID Khoáng Mạch</button>
+  <button class="copy-button" onclick="copyScript('acckm')">⛏ ID Khoáng Mạch</button>
   
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
@@ -107,7 +107,7 @@
     function purgeCDN() {
       const urls = [
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/accfull.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/acckhoangmach.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/acckm.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/accnocp.js'
       ];
       const logEl = document.getElementById('log');
@@ -137,7 +137,7 @@
       const scripts = {
         accfull: `${base}accfull.js?t=${now}`,
         accnocp: `${base}accnocp.js?t=${now}`,
-        acckhoangmach: `${base}acckhoangmach.js?t=${now}`
+        acckm: `${base}acckm.js?t=${now}`
       };
 
       const url = scripts[type];
