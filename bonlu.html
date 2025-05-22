@@ -3,146 +3,131 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🚀 Script Auto HH3D 🚀</title>
+  <title>🚀 HH3D Bookmarklet Launcher 🚀</title>
   <style>
     :root {
-      --bg-color: #2D3033;
-      --text-color: #FFFFFF;
-      --button-bg: #0d6efd;
-      --button-hover: #084298;
-      --log-bg: #eef1f5;
-    }
-    body.dark {
-      --bg-color: #1e1e2f;
-      --text-color: #f1f1f1;
-      --button-bg: #3a72f2;
-      --button-hover: #2046aa;
-      --log-bg: #2b2d42;
+      --bg: #1e1f29;
+      --text: #f1f1f1;
+      --accent: #0dcaf0;
+      --button: #198754;
+      --hover: #157347;
+      --danger: #dc3545;
+      --card: #2c2f3b;
     }
     body {
+      background: var(--bg);
+      color: var(--text);
       font-family: 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
       padding: 20px;
-      background: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      max-width: 800px;
-      margin: auto;
-      transition: all 0.3s ease;
     }
     h1 {
-      color: #d63384;
-      font-size: 24px;
+      text-align: center;
+      color: var(--accent);
     }
-    a.bookmarklet, button.purge-button, button.toggle-dark, button.copy-button {
-      display: inline-block;
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: var(--card);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    .bookmarklet-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    button {
       padding: 12px 20px;
-      background: var(--button-bg);
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 6px;
       font-size: 16px;
-      margin: 10px 10px 0 0;
       border: none;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      color: white;
+      transition: background 0.3s;
     }
-    a.bookmarklet:hover, button.purge-button:hover, button.toggle-dark:hover, button.copy-button:hover {
-      background: var(--button-hover);
+    .copy-button { background: var(--button); }
+    .copy-button:hover { background: var(--hover); }
+    .purge-button { background: var(--danger); }
+    .purge-button:hover { background: #b02a37; }
+    .log {
+      background: #0d1117;
+      border-left: 5px solid var(--accent);
+      padding: 10px;
+      color: #ccc;
+      font-family: monospace;
+      white-space: pre-wrap;
+      border-radius: 6px;
+      margin-top: 20px;
+      display: none;
     }
     .note {
-      color: #FFFFFF;
       font-size: 14px;
       margin-top: 20px;
-    }
-    .log {
-      margin-top: 20px;
-      font-family: monospace;
-      font-size: 14px;
-      background: var(--log-bg);
-      padding: 10px;
-      border-left: 4px solid var(--button-bg);
-      white-space: pre-wrap;
-    }
-    @media (max-width: 600px) {
-      a.bookmarklet, button.copy-button {
-        width: 100%;
-        margin: 8px 0;
-      }
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <h1>🚀 Check ID Bookmarklet 🚀</h1>
-  <p>
-    ⬇ Trên máy tính: kéo các nút bên dưới lên thanh ➡️ bookmarks. <br>
-    📱 Trên điện thoại: bấm nút 📋 để copy và dán thủ công.
-  </p>
+  <div class="container">
+    <h1>🚀 HH3D - Bookmarklet Script Launcher</h1>
+    <p style="text-align:center;">📎 Kéo nút bên dưới lên thanh Bookmark (máy tính) hoặc sao chép và dán (điện thoại)</p>
 
-  <p><b>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này) ⬇:</b></p>
-  <button class="copy-button" onclick="copyScript('accfull')">📋ID Full HĐ</button>
-  <button class="copy-button" onclick="copyScript('accnocp')">📋ID Full HĐ⛔ Tiên Duyên</button>
-  <button class="copy-button" onclick="copyScript('acckm')">⛏ ID Khoáng Mạch</button>
-  
-  <br>
-  <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
-  <button class="toggle-dark" onclick="toggleDarkMode()">🌙 Chuyển Dark Mode</button>
+    <div class="bookmarklet-group">
+      <button class="copy-button" onclick="copyScript('accfull')">📋 Full HĐ</button>
+      <button class="copy-button" onclick="copyScript('accnocp')">⛔ Không Chúc Phúc</button>
+      <button class="copy-button" onclick="copyScript('acckm')">⛏ Khoáng Mạch</button>
+    </div>
 
-  <div id="log" class="log" hidden></div>
+    <div style="text-align:center;">
+      <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
+    </div>
 
-  <p class="note">
-    💡 Các script luôn tải phiên bản mới nhất từ GitHub bằng tham số `?t=Date.now()`. <br>
-    🧹 Dùng nút xoá cache nếu bạn vừa cập nhật các file `.js`. <br>
-    🛠 Nếu muốn **ổn định tuyệt đối**, hãy thay `base` bằng link theo commit hash cụ thể. <br><br>
-    ❌ Không chia sẻ công khai. Script có thể bị vô hiệu nếu bị phát tán. <br>
-    ⛔ Bản quyền ©️ Bốn Lù<br>
-    ---------------------------------------------------<br>
-    📝<b>Ghi Chú</b>: <br>
-    🔁 <b>Full HĐ Share</b>: Luận võ follow, chúc phúc, lì xì, đặt 2 đá to. <br>
-    🔁 <b>Auto HĐ ⛔ Chúc Phúc</b>: KHÔNG CHÚC PHÚC, KHÔNG LÌ XÌ, đặt 2 đá to. <br>
-    ⛏ <b>Khoáng Mạch</b>: Auto nhận mốc theo thời gian. Treo tab để hoạt động. <br>
-  </p>
+    <div id="log" class="log"></div>
+
+    <p class="note">
+      🔄 Bookmarklet sử dụng <b>jsDelivr</b> với tốc độ tải cực nhanh.<br>
+      ✅ Mỗi khi bạn cập nhật file trên GitHub, hãy bấm nút "🧹 Xoá cache JSDelivr" để đảm bảo tải bản mới nhất.<br>
+      🚫 Không cần dùng `?t=Date.now()` nữa!<br>
+      ⚠️ Không chia sẻ công khai để tránh bị vô hiệu hóa.
+    </p>
+  </div>
 
   <script>
+    function copyScript(type) {
+      const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
+      const scripts = {
+        accfull: `${base}accfull.js`,
+        accnocp: `${base}accnocp.js`,
+        acckm: `${base}acckm.js`
+      };
+      const url = scripts[type];
+      const bookmarklet = `javascript:(()=>{const s=document.createElement('script');s.src='${url}';document.body.appendChild(s);})();`;
+      prompt("📋 Sao chép đoạn script bên dưới và dán vào bookmark:", bookmarklet);
+    }
+
     function purgeCDN() {
       const urls = [
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/accfull.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/acckm.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/accnocp.js'
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/accnocp.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/acckm.js'
       ];
-      const logEl = document.getElementById('log');
-      logEl.hidden = false;
-      logEl.textContent = '🔄 Đang gửi yêu cầu xoá cache...';
+      const log = document.getElementById("log");
+      log.style.display = 'block';
+      log.textContent = '⏳ Đang gửi yêu cầu xoá cache JSDelivr...';
+
       Promise.all(
         urls.map(url =>
           fetch(url)
-            .then(() => `✅ Purged: ${url}`)
-            .catch(err => `❌ Lỗi: ${url} (${err.message})`)
+            .then(() => `✅ Đã xoá cache: ${url}`)
+            .catch(e => `❌ Lỗi: ${url} (${e.message})`)
         )
       ).then(results => {
-        logEl.textContent = results.join('\n');
+        log.textContent = results.join("\n");
       });
-    }
-
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark');
-    }
-
-    function copyScript(type) {
-      const now = Date.now();
-
-      // 👉 Nếu muốn ổn định tuyệt đối thì đổi dòng này thành link chứa commit hash
-      const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
-
-      const scripts = {
-        accfull: `${base}accfull.js?t=${now}`,
-        accnocp: `${base}accnocp.js?t=${now}`,
-        acckm: `${base}acckm.js?t=${now}`
-      };
-
-      const url = scripts[type];
-      const finalScript = `javascript:(()=>{const s=document.createElement('script');s.src='${url}';document.body.appendChild(s);})();`;
-      prompt("📋 Sao chép đoạn script bên dưới và dán vào bookmark:", finalScript);
     }
   </script>
 </body>
