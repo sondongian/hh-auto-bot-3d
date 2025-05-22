@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🚀 HH3D Bookmarklet Launcher 🚀</title>
+  <title>🚀 HH3D Bookmarklet Launcher</title>
   <style>
     :root {
       --bg: #1e1f29;
@@ -51,8 +51,6 @@
     }
     .copy-button { background: var(--button); }
     .copy-button:hover { background: var(--hover); }
-    .purge-button { background: var(--danger); }
-    .purge-button:hover { background: #b02a37; }
     .log {
       background: #0d1117;
       border-left: 5px solid var(--accent);
@@ -82,23 +80,20 @@
       <button class="copy-button" onclick="copyScript('acckm')">⛏ Khoáng Mạch</button>
     </div>
 
-    <div style="text-align:center;">
-      <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
-    </div>
-
     <div id="log" class="log"></div>
 
     <p class="note">
-      🔄 Bookmarklet sử dụng <b>jsDelivr</b> với tốc độ tải cực nhanh.<br>
-      ✅ Mỗi khi bạn cập nhật file trên GitHub, hãy bấm nút "🧹 Xoá cache JSDelivr" để đảm bảo tải bản mới nhất.<br>
-      🚫 Không cần dùng `?t=Date.now()` nữa!<br>
-      ⚠️ Không chia sẻ công khai để tránh bị vô hiệu hóa.
+      ⚡ Các bookmarklet sẽ luôn lấy bản mới nhất từ GitHub thông qua <b>@latest</b>.<br>
+      ❌ Không cần dùng <code>?t=Date.now()</code><br>
+      ❌ Không cần nút xoá cache (CDN tự làm)<br>
+      🚀 Chạy cực nhanh nhờ jsDelivr CDN toàn cầu.<br>
+      📌 KHÔNG chia sẻ công khai để tránh bị vô hiệu hóa.
     </p>
   </div>
 
   <script>
     function copyScript(type) {
-      const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
+      const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot@latest/";
       const scripts = {
         accfull: `${base}accfull.js`,
         accnocp: `${base}accnocp.js`,
@@ -107,27 +102,6 @@
       const url = scripts[type];
       const bookmarklet = `javascript:(()=>{const s=document.createElement('script');s.src='${url}';document.body.appendChild(s);})();`;
       prompt("📋 Sao chép đoạn script bên dưới và dán vào bookmark:", bookmarklet);
-    }
-
-    function purgeCDN() {
-      const urls = [
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/accfull.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/accnocp.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/acckm.js'
-      ];
-      const log = document.getElementById("log");
-      log.style.display = 'block';
-      log.textContent = '⏳ Đang gửi yêu cầu xoá cache JSDelivr...';
-
-      Promise.all(
-        urls.map(url =>
-          fetch(url)
-            .then(() => `✅ Đã xoá cache: ${url}`)
-            .catch(e => `❌ Lỗi: ${url} (${e.message})`)
-        )
-      ).then(results => {
-        log.textContent = results.join("\n");
-      });
     }
   </script>
 </body>
