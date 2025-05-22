@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>🔐 Bookmarklet Tàng Hình</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #1e1e2f;
+      --text: #f5f5f5;
+      --card: #2e2e3f;
+      --accent: #00d4ff;
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .card {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px var(--shadow);
+      max-width: 700px;
+      width: 100%;
+    }
+    code {
+      background: #00000040;
+      padding: 10px;
+      display: block;
+      border-radius: 6px;
+      word-break: break-all;
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #00ffbd;
+    }
+    button {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    button:hover {
+      background: #00aacc;
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 13px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <h1>📦 Bookmarklet Auto Script</h1>
+  <div class="card">
+    <p>Sao chép đoạn bookmarklet bên dưới và lưu làm <strong>Bookmark</strong> trong trình duyệt:</p>
+    <code id="bookmarklet">
+javascript:(function(){try{const encoded='PASTE_YOUR_BASE64_HERE';const binary=atob(encoded);const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));const decoded=new TextDecoder('utf-8').decode(bytes);const blob=new Blob([decoded],{type:'application/javascript'});const url=URL.createObjectURL(blob);const s=document.createElement('script');s.src=url;document.body.appendChild(s);}catch(e){console.clear();alert('🚫 Lỗi giải mã UTF-8 hoặc dữ liệu!');window.location.reload();}})();
+    </code>
+    <button onclick="copyToClipboard()">📋 Sao chép Bookmarklet</button>
+    <p style="margin-top:10px; font-size:14px;">💡 Sau khi sao chép, hãy tạo bookmark mới và dán đoạn mã vào phần URL.</p>
+  </div>
+
+  <div class="footer">
+    © <span id="year"></span> Bảo vệ Script & Auto Tool | Không để lộ mã nguồn
+  </div>
+
+  <script>
+    function copyToClipboard() {
+      const text = document.getElementById("bookmarklet").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("✅ Đã sao chép vào clipboard!");
+      }, () => {
+        alert("❌ Sao chép thất bại!");
+      });
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
