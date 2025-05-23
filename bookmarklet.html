@@ -90,12 +90,14 @@
   <p><b>Bookmarklet cho máy tính ⬇:</b></p>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fulls.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full Hoạt Động</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcp.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ ⛔Tiên Duyên</a><br>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/hdfull.js?t='+Date.now();document.body.appendChild(s);})();">🔁HD full</a>
 
   <!-- Nút copy script cho điện thoại -->
   <p><b>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này) ⬇:</b></p>
   <button class="copy-button" onclick="copyScript('fulls')">📋 Full HĐ</button>
   <button class="copy-button" onclick="copyScript('kcp')">📋 Full HĐ ⛔Tiên Duyên</button>
   <button class="copy-button" onclick="copyScript('km')">⛏ Khoáng Mạch</button>
+  <button class="copy-button" onclick="copyScript('hdfull')">HĐ Full</button>
   
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
@@ -121,7 +123,8 @@
       const urls = [
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fulls.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcp.js'
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcp.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/hdfull.js'
       ];
       const logEl = document.getElementById('log');
       logEl.hidden = false;
@@ -147,7 +150,8 @@
       const scripts = {
         fulls: `${base}fulls.js?t=${now}`,
         kcp: `${base}kcp.js?t=${now}`,
-        km: `${base}km.js?t=${now}`
+        km: `${base}km.js?t=${now}`,
+        hdfull: `${base}hdfull.js?t=${now}`
       };
 
       const url = scripts[type];
