@@ -91,7 +91,7 @@
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fulls.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full Hoạt Động</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcp.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ ⛔Tiên Duyên</a><br>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/hdfull.js?t='+Date.now();document.body.appendChild(s);})();">🔁HD full</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/ncpf?t='+Date.now();document.body.appendChild(s);})();">🔁No CP HD full</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocpf?t='+Date.now();document.body.appendChild(s);})();">🔁No CP HD full</a>
 
   <!-- Nút copy script cho điện thoại -->
   <p><b>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này) ⬇:</b></p>
@@ -99,7 +99,7 @@
   <button class="copy-button" onclick="copyScript('kcp')">📋 Full HĐ ⛔Tiên Duyên</button>
   <button class="copy-button" onclick="copyScript('km')">⛏ Khoáng Mạch</button>
   <button class="copy-button" onclick="copyScript('hdfull')">HĐ Full</button>
-  <button class="copy-button" onclick="copyScript('ncpf')">No CP HD Full</button>
+  <button class="copy-button" onclick="copyScript('nocpf')">No CP HD Full</button>
   
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
@@ -127,7 +127,7 @@
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcp.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/hdfull.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/ncpf.js'
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocpf.js'
       ];
       const logEl = document.getElementById('log');
       logEl.hidden = false;
@@ -155,7 +155,7 @@
         kcp: `${base}kcp.js?t=${now}`,
         km: `${base}km.js?t=${now}`,
         hdfull: `${base}hdfull.js?t=${now}`,
-        ncpf: `${base}nocpf.js?t=${now}`
+        nocpf: `${base}nocpf.js?t=${now}`
       };
 
       const url = scripts[type];
