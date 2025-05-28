@@ -88,19 +88,19 @@
 
   <!-- Bookmarklet cho máy tính -->
   <p><b>Bookmarklet cho máy tính ⬇:</b></p>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fulls.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full Hoạt Động</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcp.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ ⛔Tiên Duyên</a><br>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/hdfull.js?t='+Date.now();document.body.appendChild(s);})();">🔁HD full</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocpf?t='+Date.now();document.body.appendChild(s);})();">🔁No CP HD full</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fulls2.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full Hoạt Động</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcp2.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ ⛔Tiên Duyên</a><br>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/hdfull2.js?t='+Date.now();document.body.appendChild(s);})();">🔁HD full</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocpf2.js?t='+Date.now();document.body.appendChild(s);})();">🔁No CP HD full</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kkm?t='+Date.now();document.body.appendChild(s);})();">🔁Khoáng Mạch</a>
 
   <!-- Nút copy script cho điện thoại -->
   <p><b>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này) ⬇:</b></p>
-  <button class="copy-button" onclick="copyScript('fulls')">📋 Full HĐ</button>
-  <button class="copy-button" onclick="copyScript('kcp')">📋 Full HĐ ⛔Tiên Duyên</button>
+  <button class="copy-button" onclick="copyScript('fulls2')">📋 Full HĐ</button>
+  <button class="copy-button" onclick="copyScript('kcp2')">📋 Full HĐ ⛔Tiên Duyên</button>
   <button class="copy-button" onclick="copyScript('km')">⛏ Khoáng Mạch</button>
-  <button class="copy-button" onclick="copyScript('hdfull')">HĐ Full</button>
-  <button class="copy-button" onclick="copyScript('nocpf')">No CP HD Full</button>
+  <button class="copy-button" onclick="copyScript('hdfull2')">HĐ Full</button>
+  <button class="copy-button" onclick="copyScript('nocpf2')">No CP HD Full</button>
   <button class="copy-button" onclick="copyScript('kkm')">Khoáng Mạch</button>
   
   <br>
@@ -125,11 +125,11 @@
   <script>
     function purgeCDN() {
       const urls = [
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fulls.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fulls2.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcp.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/hdfull.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocpf.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcp2.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/hdfull2.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocpf2.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kkm.js'
       ];
       const logEl = document.getElementById('log');
@@ -154,11 +154,11 @@
       const now = Date.now();
       const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
       const scripts = {
-        fulls: `${base}fulls.js?t=${now}`,
-        kcp: `${base}kcp.js?t=${now}`,
+        fulls2: `${base}fulls2.js?t=${now}`,
+        kcp2: `${base}kcp2.js?t=${now}`,
         km: `${base}km.js?t=${now}`,
-        hdfull: `${base}hdfull.js?t=${now}`,
-        nocpf: `${base}nocpf.js?t=${now}`,
+        hdfull2: `${base}hdfull2.js?t=${now}`,
+        nocpf2: `${base}nocpf2.js?t=${now}`,
         kkm: `${base}kmm.js?t=${now}`
       };
 
