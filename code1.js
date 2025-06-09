@@ -1825,7 +1825,7 @@ const tasks = []
 // Nhận Lì Xì nếu có (true hoặc false).
 // ➤ blessingLiXi = true: Chúc phúc Tiên Duyên + Nhận Lì Xì.
 // ➤ blessingLiXi = false: Chỉ chúc phúc Tiên Duyên + Không nhận Lì Xì.
-const blessingLiXi = true
+const blessingLiXi = false
 
 // Loại đá bạn muốn cược trong Đổ Thạch - Từ 1 đến 6 (number).
 // ➤ Nếu muốn thay đổi loại đá để cược, chỉ cần chỉnh lại các con số trong mảng `bets`.
@@ -1835,17 +1835,17 @@ const bets = [1, 2]
 // Tự động nhận khiêu chiến trong Luận Võ (true hoặc false).
 // ➤ battleAutoOn = true: Bật tự động nhận khiêu chiến.
 // ➤ battleAutoOn = false: Tắt tự động nhận khiêu chiến.
-const battleAutoOn = true
+const battleAutoOn = false
 
 // Tùy chọn gửi khiêu chiến trong Luận Võ - `online` (true hoặc false) - `retries` (number).
 // ➤ online: false = Không tự động tìm đánh người Online khi lượt gửi người Theo dõi chưa đạt tối đa.
 // ➤ online: true = Tự động tìm đánh người Online khi lượt gửi người Theo dõi chưa đạt tối đa.
 // ➤ retries: 3 = Số lần tải lại danh sách người Online.
-const battleOptions = { online: true, retries: 3 }
+const battleOptions = { online: false, retries: 3 }
 
 // Danh sách code cần nhập trong Linh Thạch (text).
 // ➤ Ví dụ: codes = ["19THANG5", "HOATHINH3DSITE"] hoặc codes = ['19THANG5', 'HOATHINH3DSITE']
-const codes = ["EMLAEMBEEMMUONDUOCQUA", "CODEBAOTRI ","HOATHINH3D3001A", "HOATHINH3D3001B","HOATHINH3D4001A ","HOATHINH3D4001B ","HOATHINH3D6001A ", "HOATHINH3D6001B ","HOATHINH3D9001A","HOATHINH3D9001B ","HOATHINH3D13001A ","HOATHINH3D13001B ", "HOATHINH3D19001A ", "HOATHINH3D19001B "]
+const codes = ["CONGDUCVOLUONG","HOATHINH3D3001A", "HOATHINH3D3001B","HOATHINH3D4001A ","HOATHINH3D4001B ","HOATHINH3D6001A ", "HOATHINH3D6001B ","HOATHINH3D9001A","HOATHINH3D9001B ","HOATHINH3D13001A ","HOATHINH3D13001B ", "HOATHINH3D19001A ", "HOATHINH3D19001B "]
 
 {
     (async () => {
