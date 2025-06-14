@@ -85,31 +85,14 @@
     ⬇ Trên máy tính: kéo các nút bên dưới lên thanh ➡️ bookmarks. <br>
     📱 Trên điện thoại: bấm nút 📋 để copy và dán thủ công.
   </p>
-
-  <!-- Bookmarklet cho máy tính -->
-  <p><b>Bookmarklet cho máy tính ⬇:</b></p>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fulls9s.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full Hoạt Động</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcp9.js?t='+Date.now();document.body.appendChild(s);})();">🔁Full HĐ ⛔Tiên Duyên</a><br>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/hdfull8s.js?t='+Date.now();document.body.appendChild(s);})();">🔁HD full</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocpf8.js?t='+Date.now();document.body.appendChild(s);})();">🔁No CP HD full</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fulllhp5.js?t='+Date.now();document.body.appendChild(s);})();">🔁FullHĐ-LHP</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcplhp5.js?t='+Date.now();document.body.appendChild(s);})();">🔁KCP-LHP</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/code1.js?t='+Date.now();document.body.appendChild(s);})();">🔁Code tân thủ</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kkm2?t='+Date.now();document.body.appendChild(s);})();">🔁Khoáng Mạch</a>
-  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/scriptkm_checkid?t='+Date.now();document.body.appendChild(s);})();">🔁Khoáng Mạch</a>
-
   <!-- Nút copy script cho điện thoại -->
   <p><b>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này) ⬇:</b></p>
-  <button class="copy-button" onclick="copyScript('fulls9s')">📋 Full HĐ</button>
-  <button class="copy-button" onclick="copyScript('kcp9')">📋 Full HĐ ⛔Tiên Duyên</button>
-  <button class="copy-button" onclick="copyScript('km')">⛏ Khoáng Mạch</button>
-  <button class="copy-button" onclick="copyScript('hdfull8s')">HĐ Full</button>
-  <button class="copy-button" onclick="copyScript('nocpf8')">No CP HD Full</button>
-  <button class="copy-button" onclick="copyScript('fulllhp5')">🔁FullHĐ-LHP</button>
-  <button class="copy-button" onclick="copyScript('kcplhp5')">🔁KCP-LHP</button>
-  <button class="copy-button" onclick="copyScript('code1')">🔁code tân thủ</button>
-  <button class="copy-button" onclick="copyScript('kkm2')">Khoáng Mạch</button>
-  <button class="copy-button" onclick="copyScript('scriptkm_checkid')">Khoáng Mạch Check ID</button>
+  <button class="copy-button" onclick="copyScript('full_hd_checkid')">📋 Full-HĐ-Check-ID</button>
+  <button class="copy-button" onclick="copyScript('full_kcp_checkid')">📋 Full-HĐ-KCP-Check-ID</button>
+  <button class="copy-button" onclick="copyScript('full_hd_lhp')">📋 Full-HĐ-LHP</button>
+  <button class="copy-button" onclick="copyScript('full_kcp_lhp')">📋 Full-KCP-LHP</button>
+  <button class="copy-button" onclick="copyScript('km_no_checkid')">📋 Khoáng Mạch</button>
+  <button class="copy-button" onclick="copyScript('scriptkm_checkid')">📋 Khoáng Mạch Check ID</button>
   
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
@@ -133,15 +116,11 @@
   <script>
     function purgeCDN() {
       const urls = [
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fulls9s.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcp9.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/hdfull8s.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/nocpf8.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fulllhp5.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcplhp5.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/code1.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kkm2.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_hd_checkid.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_kcp_checkid.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_hd_lhp.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_kcp_lhp.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km_no_checkid.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/scriptkm_checkid.js'
       ];
       const logEl = document.getElementById('log');
@@ -166,15 +145,11 @@
       const now = Date.now();
       const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
       const scripts = {
-        fulls9s: `${base}fulls9s.js?t=${now}`,
-        kcp9: `${base}kcp9.js?t=${now}`,
-        km: `${base}km.js?t=${now}`,
-        hdfull8s: `${base}hdfull8s.js?t=${now}`,
-        nocpf8: `${base}nocpf8.js?t=${now}`,
-        fulllhp5: `${base}fulllhp5.js?t=${now}`,
-        kcplhp5: `${base}kcplhp5.js?t=${now}`,
-        code1: `${base}code1.js?t=${now}`,
-        kkm2: `${base}kkm2.js?t=${now}`,
+        full_hd_checkid: `${base}full_hd_checkid.js?t=${now}`,
+        full_kcp_checkid: `${base}full_kcp_checkid.js?t=${now}`,
+        full_hd_lhp: `${base}full_hd_lhp.js?t=${now}`,
+        full_kcp_lhp: `${base}full_kcp_lhp.js?t=${now}`,
+        km_no_checkid: `${base}km_no_checkid.js?t=${now}`,
         scriptkm_checkid: `${base}scriptkm_checkid.js?t=${now}`,
       };
 
