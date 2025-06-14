@@ -89,10 +89,10 @@
   <p><b>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này) ⬇:</b></p>
   <button class="copy-button" onclick="copyScript('full_hd_checkid')">📋 Full-HĐ-Check-ID</button>
   <button class="copy-button" onclick="copyScript('full_kcp_checkid')">📋 Full-KCP-Check-ID</button>
-  <button class="copy-button" onclick="copyScript('scriptkm_checkid')">📋 Khoáng Mạch Check ID</button><br>
+  <button class="copy-button" onclick="copyScript('km_checkid')">📋 Khoáng Mạch Check ID</button><br>
   <button class="copy-button" onclick="copyScript('full_hd_lhp')">📋 Full-HĐ-LHP</button>
   <button class="copy-button" onclick="copyScript('full_kcp_lhp')">📋 Full-KCP-LHP</button>
-  <button class="copy-button" onclick="copyScript('km_no_checkid')">📋 Khoáng Mạch</button>
+  <button class="copy-button" onclick="copyScript('km_no_check_id')">📋 Khoáng Mạch</button>
   
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
@@ -120,8 +120,8 @@
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_kcp_checkid.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_hd_lhp.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_kcp_lhp.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km_no_checkid.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/scriptkm_checkid.js'
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km_no_check_id.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km_checkid.js'
       ];
       const logEl = document.getElementById('log');
       logEl.hidden = false;
@@ -149,8 +149,8 @@
         full_kcp_checkid: `${base}full_kcp_checkid.js?t=${now}`,
         full_hd_lhp: `${base}full_hd_lhp.js?t=${now}`,
         full_kcp_lhp: `${base}full_kcp_lhp.js?t=${now}`,
-        km_no_checkid: `${base}km_no_checkid.js?t=${now}`,
-        scriptkm_checkid: `${base}scriptkm_checkid.js?t=${now}`,
+        km_no_check_id: `${base}km_no_check_id.js?t=${now}`,
+        km_checkid: `${base}km_checkid.js?t=${now}`,
       };
 
       const url = scripts[type];
