@@ -96,6 +96,7 @@
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcplhp5.js?t='+Date.now();document.body.appendChild(s);})();">🔁KCP-LHP</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/code1.js?t='+Date.now();document.body.appendChild(s);})();">🔁Code tân thủ</a>
   <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kkm2?t='+Date.now();document.body.appendChild(s);})();">🔁Khoáng Mạch</a>
+  <a class="bookmarklet" href="javascript:(()=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/scriptkm-checkid?t='+Date.now();document.body.appendChild(s);})();">🔁Khoáng Mạch</a>
 
   <!-- Nút copy script cho điện thoại -->
   <p><b>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này) ⬇:</b></p>
@@ -108,6 +109,7 @@
   <button class="copy-button" onclick="copyScript('kcplhp5')">🔁KCP-LHP</button>
   <button class="copy-button" onclick="copyScript('code1')">🔁code tân thủ</button>
   <button class="copy-button" onclick="copyScript('kkm2')">Khoáng Mạch</button>
+  <button class="copy-button" onclick="copyScript('scriptkm-checkid')">Khoáng Mạch Check ID</button>
   
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
@@ -139,7 +141,8 @@
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/fulllhp5.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kcplhp5.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/code1.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kkm2.js'
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/kkm2.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/scriptkm-checkid.js'
       ];
       const logEl = document.getElementById('log');
       logEl.hidden = false;
@@ -171,7 +174,8 @@
         fulllhp5: `${base}fulllhp5.js?t=${now}`,
         kcplhp5: `${base}kcplhp5.js?t=${now}`,
         code1: `${base}code1.js?t=${now}`,
-        kkm2: `${base}kkm2.js?t=${now}`
+        kkm2: `${base}kkm2.js?t=${now}`,
+        scriptkm-checkid: `${base}scriptkm-checkid.js?t=${now}`,
       };
 
       const url = scripts[type];
