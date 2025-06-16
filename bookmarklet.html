@@ -88,11 +88,11 @@
   
   <!-- Nút copy script cho điện thoại -->
   <p><b>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này) ⬇:</b></p>
-  <button class="copy-button" onclick="copyScript('full_hd_check_id_1')">📋 Full-HĐ-Check-ID</button>
-  <button class="copy-button" onclick="copyScript('full_kcp_check_id_1')">📋 Full-KCP-Check-ID</button>
+  <button class="copy-button" onclick="copyScript('full_hd_check_id_1_1')">📋 Full-HĐ-Check-ID</button>
+  <button class="copy-button" onclick="copyScript('full_kcp_check_id_1_1')">📋 Full-KCP-Check-ID</button>
   <button class="copy-button" onclick="copyScript('km_check_id_1_1')">📋 Khoáng Mạch Check ID</button><br>
-  <button class="copy-button" onclick="copyScript('full_hd_lhp_1')">📋 Full-HĐ-LHP</button>
-  <button class="copy-button" onclick="copyScript('full_kcp_lhp_1_1')">📋 Full-KCP-LHP</button>
+  <button class="copy-button" onclick="copyScript('full_hd_lhp_1_1')">📋 Full-HĐ-LHP</button>
+  <button class="copy-button" onclick="copyScript('full_hd_lhp_1_2')">📋 Full-KCP-LHP</button>
   <button class="copy-button" onclick="copyScript('km_no_check_id_1_1')">📋 Khoáng Mạch</button>
   
   <br>
@@ -117,10 +117,10 @@
   <script>
     function purgeCDN() {
       const urls = [
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_hd_check_id_1.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_kcp_check_id_1.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_hd_lhp_1.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_kcp_lhp_1_1.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_hd_check_id_1_1.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_kcp_check_id_1_1.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_hd_lhp_1_1.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_hd_lhp_1_2.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km_no_check_id_1_1.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km_check_id_1_1.js'
       ];
@@ -146,10 +146,10 @@
       const now = Date.now();
       const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
       const scripts = {
-        full_hd_check_id_1: `${base}full_hd_check_id_1.js?t=${now}`,
-        full_kcp_check_id_1: `${base}full_kcp_check_id_1.js?t=${now}`,
-        full_hd_lhp_1: `${base}full_hd_lhp_1.js?t=${now}`,
-        full_kcp_lhp_1_1: `${base}full_kcp_lhp_1_1.js?t=${now}`,
+        full_hd_check_id_1_1: `${base}full_hd_check_id_1_1.js?t=${now}`,
+        full_kcp_check_id_1_1: `${base}full_kcp_check_id_1_1.js?t=${now}`,
+        full_hd_lhp_1_1: `${base}full_hd_lhp_1_1.js?t=${now}`,
+        full_hd_lhp_1_2: `${base}full_hd_lhp_1_2.js?t=${now}`,
         km_no_check_id_1_1: `${base}km_no_check_id_1_1.js?t=${now}`,
         km_check_id_1_1: `${base}km_check_id_1_1.js?t=${now}`,
       };
