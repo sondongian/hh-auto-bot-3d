@@ -93,9 +93,12 @@
   <button class="copy-button" onclick="copyScript('km_check_id_1_1')">📋 Khoáng Mạch Check ID</button><br>
   <button class="copy-button" onclick="copyScript('full_hd_lhp_1_1')">📋 Full-HĐ-LHP</button>
   <button class="copy-button" onclick="copyScript('full_kcp_lhp2')">📋 Full-KCP-LHP</button>
-  <button class="copy-button" onclick="copyScript('km_no_check_id_1_1')">📋 Khoáng Mạch</button>
+  <button class="copy-button" onclick="copyScript('km_no_check_id_1_1')">📋 Khoáng Mạch</button><br>
   <button class="copy-button" onclick="copyScript('sondz_full_2')">📋 Sonfull</button>
-  <button class="copy-button" onclick="copyScript('sondz_kcp_2')">📋 Sonkcp</button>
+  <button class="copy-button" onclick="copyScript('sondz_kcp_2')">📋 Sonkcp</button><br>
+  <button class="copy-button" onclick="copyScript('xfull')">📋 X full</button>
+  <button class="copy-button" onclick="copyScript('xncp')">📋 xncp</button>
+  
   
   <br>
   <button class="purge-button" onclick="purgeCDN()">🧹 Xoá cache JSDelivr</button>
@@ -155,7 +158,9 @@
         km_no_check_id_1_1: `${base}km_no_check_id_1_1.js?t=${now}`,
         km_check_id_1_1: `${base}km_check_id_1_1.js?t=${now}`,
         sondz_full_2: `${base}sondz_full_2.js?t=${now}`,
-        sondz_kcp_2: `${base}sondz_kcp_2.js?t=${now}`
+        sondz_kcp_2: `${base}sondz_kcp_2.js?t=${now}`,
+        xfull: `${base}xfull.js?t=${now}`,
+        xncp: `${base}xncp.js?t=${now}`
       };
 
       const url = scripts[type];
