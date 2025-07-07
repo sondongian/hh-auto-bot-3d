@@ -88,9 +88,9 @@
   
   <!-- Nút copy script cho điện thoại -->
   <p><b>Bookmarklet cho máy tính và điện thoại (Nên sử dụng cái này) ⬇:</b></p>
-  <button class="copy-button" onclick="copyScript('full_hd_check_id_1_5')">📋 Full-HĐ-Check-ID</button>
-  <button class="copy-button" onclick="copyScript('full_kcp_check_id_1_5')">📋 Full-KCP-Check-ID</button>
-  <button class="copy-button" onclick="copyScript('km_check_id_1_1')">📋 Khoáng Mạch Check ID</button><br>
+  <button class="copy-button" onclick="copyScript('full_hd_check_id_1_6')">📋 Full-HĐ-Check-ID</button>
+  <button class="copy-button" onclick="copyScript('full_kcp_check_id_1_6')">📋 Full-KCP-Check-ID</button>
+  <button class="copy-button" onclick="copyScript('km_check_id_1_2')">📋 Khoáng Mạch Check ID</button><br>
   <button class="copy-button" onclick="copyScript('full_hd_lhp_1_6')">📋 Full-HĐ-LHP</button>
   <button class="copy-button" onclick="copyScript('full_kcp_lhp_1_6')">📋 Full-KCP-LHP</button>
   <button class="copy-button" onclick="copyScript('km_no_check_id_1_1')">📋 Khoáng Mạch</button><br>
@@ -99,7 +99,7 @@
   <button class="copy-button" onclick="copyScript('sondz_full_6')">📋 Sonfull</button>
   <button class="copy-button" onclick="copyScript('sondz_kcp_6')">📋 Sonkcp</button>
   <button class="copy-button" onclick="copyScript('kmsdz2')">📋 KM2 </button><br>
-  <button class="copy-button" onclick="copyScript('xfull')">📋 X full</button>
+  <button class="copy-button" onclick="copyScript('xfull1')">📋 xfull1</button>
   <button class="copy-button" onclick="copyScript('xncp')">📋 xncp</button><br>
   <button class="copy-button" onclick="copyScript('duatop4')">📋 duatop4</button>
   
@@ -126,12 +126,12 @@
   <script>
     function purgeCDN() {
       const urls = [
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_hd_check_id_1_5.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_kcp_check_id_1_5.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_hd_check_id_1_6.js',
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_kcp_check_id_1_6.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_hd_lhp_1_6.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/full_kcp_lhp_1_6.js',
         'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km_no_check_id_1_1.js',
-        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km_check_id_1_1.js'
+        'https://purge.jsdelivr.net/gh/sondongian/hh3d-auto-bot/km_check_id_1_2.js'
       ];
       const logEl = document.getElementById('log');
       logEl.hidden = false;
@@ -155,18 +155,18 @@
       const now = Date.now();
       const base = "https://cdn.jsdelivr.net/gh/sondongian/hh3d-auto-bot/";
       const scripts = {
-        full_hd_check_id_1_5: `${base}full_hd_check_id_1_5.js?t=${now}`,
-        full_kcp_check_id_1_5: `${base}full_kcp_check_id_1_5.js?t=${now}`,
+        full_hd_check_id_1_6: `${base}full_hd_check_id_1_6.js?t=${now}`,
+        full_kcp_check_id_1_6: `${base}full_kcp_check_id_1_6.js?t=${now}`,
         full_hd_lhp_1_6: `${base}full_hd_lhp_1_6.js?t=${now}`,
         full_kcp_lhp_1_6: `${base}full_kcp_lhp_1_6.js?t=${now}`,
         km_no_check_id_1_1: `${base}km_no_check_id_1_1.js?t=${now}`,
-        km_check_id_1_1: `${base}km_check_id_1_1.js?t=${now}`,
+        km_check_id_1_2: `${base}km_check_id_1_2.js?t=${now}`,
         sdzfull4: `${base}sdzfull4.js?t=${now}`,
         sdzkcp4: `${base}sdzkcp4.js?t=${now}`,
         kmsdz2: `${base}kmsdz2.js?t=${now}`,
         sondz_full_6: `${base}sondz_full_6.js?t=${now}`,
         sondz_kcp_6: `${base}sondz_kcp_6.js?t=${now}`,
-        xfull: `${base}xfull.js?t=${now}`,
+        xfull1: `${base}xfull1.js?t=${now}`,
         xncp: `${base}xncp.js?t=${now}`,
         duatop4: `${base}duatop4.js?t=${now}`
       };
